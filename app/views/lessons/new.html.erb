@@ -1,0 +1,18 @@
+<% if @lesson.errors.any? %>
+  <h2>We have some errors here !</h2>
+  <ul>
+    <% @lesson.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @lesson do |f| %>
+  <%= f.label :title, "Title" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content, "Content" %>
+  <%= f.text_area :content %>
+
+  <%= f.submit %>
+<% end %>
