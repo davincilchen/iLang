@@ -3,6 +3,7 @@
   <% @lessons.each do |lesson| %>
   <li>
     <%= lesson.title %>
+    <%= lesson.content %>
     <%= link_to 'Delete', lesson_path(lesson), method: :delete, data: {confirm:"Are you sure?"} %>
   </li>
   <% end %>
