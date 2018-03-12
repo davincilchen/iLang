@@ -1,1 +1,10 @@
-<h1>lessons index</h1>
+<h1>Lessons index</h1>
+<ul>
+  <% @lessons.each do |lesson| %>
+  <li>
+    <%= lesson.title %>
+    <%= link_to 'Delete', lesson_path(lesson), method: :delete, data: {confirm:"Are you sure?"} %>
+  </li>
+  <% end %>
+</ul>
+<%= link_to 'New Lesson', new_lesson_path %>
