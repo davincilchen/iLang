@@ -1,5 +1,4 @@
 class Learning < ApplicationRecord
   belongs_to :user
-  
-  has_many :languages
+  belongs_to :language
 end
