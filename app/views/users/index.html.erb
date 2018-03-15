@@ -1,8 +1,25 @@
-<h1>I am looking for someone who wants to</h1>
+I am looking for someone who wants to
 <!-- https://rails.ruby.tw/form_helpers.html -->
 
-<select name="language_id" id="language_id">
-  <option value="1">English</option>
-  <option value="2">Chinese</option>
-  <option value="3">Japanese</option>
+<select name="teach_or_learn">
+  <option value="1">Teach</option>
+  <option value="2">Learn</option>
 </select>
+
+
+<%= collection_select(:language, :language_id, Language.all, :id, :name, prompt: true) %>
+
+<%= link_to "Search" %>
+
+
+<% @users.each do |user| %>
+  <h2><%= user.username %></h2>
+  <h3>What I want to teach</h3>
+  <% user.teachings.each do |teach|%>
+    <%= teach.language.name %>
+  <% end %>
+  <h3>What I want to learn</h3>
+  <% user.learnings.each do |learn|%>
+    <%= learn.language.name %>
+  <% end %>
+<% end %>
