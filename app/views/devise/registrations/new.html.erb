@@ -25,18 +25,6 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
-  
-  <div>
-    <%= f.label :i_want_to_learn %><br />
-    <% languages_array = Language.all.map { |language| [language.name, language.id] } %>
-    <%= select_tag "learn_languages", options_for_select(languages_array), {:class=>"selectpicker"} %>
-  </div>
-
-  <div>
-    <%= f.label :i_want_to_teach %><br />
-    <% languages_array = Language.all.map { |language| [language.name, language.id] } %>
-    <%= select_tag "teach_languages", options_for_select(languages_array) %>
-  </div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
