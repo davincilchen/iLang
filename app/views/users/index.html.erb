@@ -6,19 +6,13 @@ I am looking for someone who wants to
     <option value="Teach">Teach</option>
     <option value="Learn">Learn</option>
   </select>
-  <button type="submit">Search</button>
+  <!-- https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms -->
+  <%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "All Language"}) %>
+
+  <input type="submit" name="commit" value="Search" data-disable-with="Search">
 </form>
 
-<!--
-<%= form_tag search_users_path, method: 'get' do %>
 
-  <%= select_tag 't_or_l', options_for_select([["Teach",1],["Learn",2]], params[:option]) %>
-
-  <%= collection_select(:language, :language_id, Language.all, :id, :name, prompt: 'Select Language') %>
-  <%= submit_tag 'Search' %>
-
-<% end %>
--->
 
 <% @users.each do |user| %>
   <h2><%= user.username %></h2>
@@ -33,3 +27,5 @@ I am looking for someone who wants to
   <% end %>
 
 <% end %>
+
+
