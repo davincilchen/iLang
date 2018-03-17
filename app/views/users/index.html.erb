@@ -15,11 +15,12 @@ I am looking for someone who wants to
 <% @users.each do |user| %>
   <h2><%= user.username %></h2>
   <h3>What I want to teach</h3>
-  <% user.teachings.each do |teach|%>
-    <%= teach.language.name %>
+  <% user.teaching_languages.each do |language|%>
+    <%= language.name %>
   <% end %>
   <h3>What I want to learn</h3>
-  <% user.learnings.each do |learn|%>
-    <%= learn.language.name %>
+  <% user.learning_languages.each do |language| %>
+    <%= language.name %>
   <% end %>
+
 <% end %>
