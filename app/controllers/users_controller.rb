@@ -4,4 +4,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def learning
+  end
+
+  def teaching
+  end
+
 end
