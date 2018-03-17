@@ -1,25 +1,14 @@
 I am looking for someone who wants to
 <!-- https://rails.ruby.tw/form_helpers.html -->
 
-<select name="teach_or_learn">
-  <option value="1">Teach</option>
-  <option value="2">Learn</option>
-</select>
+<form accept-charset="UTF-8" action="users/search" method="get">
+  <select name="option">
+    <option value="Teach">Teach</option>
+    <option value="Learn">Learn</option>
+  </select>
+  <!-- https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms -->
+  <%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "All Language"}) %>
 
+  <input type="submit" name="commit" value="Search" data-disable-with="Search">
+</form>
 
-<%= collection_select(:language, :language_id, Language.all, :id, :name, prompt: true) %>
-
-<%= link_to "Search" %>
-
-
-<% @users.each do |user| %>
-  <h2><%= user.username %></h2>
-  <h3>What I want to teach</h3>
-  <% user.teachings.each do |teach|%>
-    <%= teach.language.name %>
-  <% end %>
-  <h3>What I want to learn</h3>
-  <% user.learnings.each do |learn|%>
-    <%= learn.language.name %>
-  <% end %>
-<% end %>
