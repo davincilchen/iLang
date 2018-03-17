@@ -16,5 +16,5 @@ class User < ApplicationRecord
   has_many :teachings, dependent: :destroy
   has_many :teaching_languages, through: :teachings, source: :language
 
-  has_and_belongs_to_many :languages
+
 end
