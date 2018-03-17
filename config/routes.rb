@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :lessons, only: [:new, :create, :destroy] 
 
-  resources :users, only: [:index, :edit, :create, :destroy] do
+  resources :users, only: [:index, :edit, :create, :destroy, :show] do
     member do 
     	post :learning
     	post :teaching
