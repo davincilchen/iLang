@@ -19,7 +19,6 @@ namespace :dev do
         username: user_name,
         email: "#{user_name}@example.com",
         password: "12345678",
-        t_or_l_status: "Teach"
       )
     end
 
