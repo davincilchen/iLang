@@ -18,7 +18,8 @@ namespace :dev do
       User.create!(
         username: user_name,
         email: "#{user_name}@example.com",
-        password: "12345678"
+        password: "12345678",
+        t_or_l_status: "Teach"
       )
     end
 

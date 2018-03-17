@@ -1,19 +1,28 @@
 I am looking for someone who wants to
 <!-- https://rails.ruby.tw/form_helpers.html -->
 
-<select name="teach_or_learn">
-  <option value="1">Teach</option>
-  <option value="2">Learn</option>
-</select>
+<form accept-charset="UTF-8" action="users/search" method="get">
+  <select name="option">
+    <option value="Teach">Teach</option>
+    <option value="Learn">Learn</option>
+  </select>
+  <button type="submit">Search</button>
+</form>
 
+<!--
+<%= form_tag search_users_path, method: 'get' do %>
 
-<%= collection_select(:language, :language_id, Language.all, :id, :name, prompt: true) %>
+  <%= select_tag 't_or_l', options_for_select([["Teach",1],["Learn",2]], params[:option]) %>
 
-<%= link_to "Search" %>
+  <%= collection_select(:language, :language_id, Language.all, :id, :name, prompt: 'Select Language') %>
+  <%= submit_tag 'Search' %>
 
+<% end %>
+-->
 
 <% @users.each do |user| %>
   <h2><%= user.username %></h2>
+  <%= user.t_or_l_status %>
   <h3>What I want to teach</h3>
   <% user.teaching_languages.each do |language|%>
     <%= language.name %>

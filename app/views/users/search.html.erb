@@ -1,0 +1,14 @@
+I am looking for someone who wants to
+<!-- https://rails.ruby.tw/form_helpers.html -->
+
+<% @users.each do |user| %>
+  <h2><%= user.username %></h2>
+  <h3>What I want to teach</h3>
+  <% user.teaching_languages.each do |language|%>
+    <%= language.name %>
+  <% end %>
+  <h3>What I want to learn</h3>
+  <% user.learning_languages.each do |language| %>
+    <%= language.name %>
+  <% end %>
+<% end %>
