@@ -1,19 +1,17 @@
-<%= form_for [@user] do |f| %>
-  <%= f.label :username, "Name" %>
-  <%= f.text_field :username, class: "form-control" %>
-
-  <%= f.label :description, "Intro" %>
-  <%= f.text_area :description, class: "form-control" %>
-
-  <%= f.label :avatar, "Photo" %>
+<%= form_for @user do |f| %>
+  <%= f.label :avatar, "Avatar" %>
     <% if @user.avatar? %>
       <%= image_tag @user.avatar, width: '300px' %>
     <% else %>
-      <%= image_tag("300x300.png") %>
+      <%= image_tag "/300x300.png" %>
     <% end %>
   <%= f.file_field :avatar %>
 
-  <br>
+  <%= f.label :username, "Name" %>
+  <%= f.text_field :username %>
 
+  <%= f.label :description, "Intro" %>
+  <%= f.text_area :description %>
 
-<%= f.submit class: "btn btn-primary" %>
+  <%= f.submit %>
+<% end %>
