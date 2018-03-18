@@ -32,11 +32,11 @@
 
 <% @user.friendings.each do |friend| %>
   <% if friend.avatar? %>
-    <%= image_tag friend.avatar, width: '300px' %>
+    <%= link_to image_tag(friend.avatar), user_path(friend) %>
   <% else %>
-    <%= image_tag "/300x300.png" %>
+    <%= link_to image_tag("/300x300.png"), user_path(friend) %>
   <% end %>
-  <%= friend.name %>
+  <%= link_to friend.username, user_path(friend) %>
 <% end %>
 
 
