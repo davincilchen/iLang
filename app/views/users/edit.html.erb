@@ -1,0 +1,17 @@
+<%= form_for @user do |f| %>
+  <%= f.label :avatar, "Avatar" %>
+    <% if @user.avatar? %>
+      <%= image_tag @user.avatar, width: '300px' %>
+    <% else %>
+      <%= image_tag "/300x300.png" %>
+    <% end %>
+  <%= f.file_field :avatar %>
+
+  <%= f.label :username, "Name" %>
+  <%= f.text_field :username %>
+
+  <%= f.label :description, "Intro" %>
+  <%= f.text_area :description %>
+
+  <%= f.submit 'Update', class: "btn btn-default"%>
+<% end %>

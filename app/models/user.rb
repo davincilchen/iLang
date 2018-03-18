@@ -16,5 +16,13 @@ class User < ApplicationRecord
   has_many :teachings, dependent: :destroy
   has_many :teaching_languages, through: :teachings, source: :language
 
+  mount_uploader :avatar, AvatarUploader
 
+  has_many :friendships, dependent: :destroy
+  has_many :friendings, through: :friendships
+
+  def friending?(user)
+    self.friendings.include?(user)
+  end
+  
 end

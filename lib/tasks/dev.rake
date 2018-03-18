@@ -54,4 +54,5 @@ namespace :dev do
     puts "now you have #{Learning.count} learnings data"
   end
 
+
 end

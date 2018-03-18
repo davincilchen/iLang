@@ -32,6 +32,7 @@ gem 'devise'
 
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
+gem 'carrierwave'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

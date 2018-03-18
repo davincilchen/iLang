@@ -1,6 +1,12 @@
 
 <% @users.each do |user| %>
-  <h2><%= user.username %></h2>
+  <h2><%= link_to user.username, user_path(user) %></h2>
+  <% if user.avatar? %>
+    <%= link_to image_tag(user.avatar), user_path(user) %>
+  <% else %>
+    <%= link_to image_tag("/300x300.png"), user_path(user) %>
+  <% end %>
+  <%= truncate(user.description, length: 75) %>
   <h3>What I want to teach</h3>
   <% user.teaching_languages.each do |language|%>
     <%= language.name %>
