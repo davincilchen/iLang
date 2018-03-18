@@ -6,9 +6,8 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@learnings = current_user.learnings
-		@teachings = current_user.teachings
-
+		@current_learnings = current_user.learnings.select(:language_id).pluck(:language_id)
+		@current_teachings = current_user.teachings.select(:language_id).pluck(:language_id)
 	end
 
 	def update
