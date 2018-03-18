@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 	end
 
 	def learning
+		Learning.where(user: current_user).destroy_all
 		params[:languages].each do |l|
 			puts "adding language #{l} for user #{current_user}"
 			@learning = current_user.learnings.new(language_id: l)
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
 	end
 
 	def teaching
+		Teaching.where(user: current_user).destroy_all
 		params[:languages].each do |l|
 			puts "adding language #{l} for user #{current_user}"
 			@teaching = current_user.teachings.new(language_id: l)
@@ -34,11 +36,11 @@ class UsersController < ApplicationController
 
 	private
 	def user_params
-	params.require(:user).permit(:name, :introduction, :avatar)
+		params.require(:user).permit(:name, :introduction, :avatar)
 	end
 
 	def set_user
-	@user = User.find(params[:id])
+		@user = User.find(params[:id])
 	end
 
 end
