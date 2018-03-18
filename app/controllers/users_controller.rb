@@ -21,7 +21,10 @@ class UsersController < ApplicationController
       else
         @users = User.joins(:learning_languages).where("name = ?", params[:language][:id]).all.order("random()")
       end
-    end
-      
+    end     
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 end
