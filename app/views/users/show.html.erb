@@ -1,4 +1,19 @@
 
-<!-- <%= image_tag @user.avatar, class: "img-responsive img-rounded" %> -->
+<% if @user.avatar? %>
+  <%= image_tag @user.avatar, width: '300px' %>
+<% else %>
+  <%= image_tag "/300x300.png" %>
+<% end %>
 <%= @user.username %>
 <%= simple_format @user.description %>
+
+<p>What I want to teach</p>
+<% @user.teaching_languages.each do |language|%>
+  <%= language.name %>
+<% end %>
+
+<p>What I want to learn</p>
+<% @user.learning_languages.each do |language| %>
+  <%= language.name %>
+<% end %>
+
