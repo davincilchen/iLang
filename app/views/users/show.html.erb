@@ -30,6 +30,15 @@
 
 <p>Friend List</p>
 
+<% @user.friendings.each do |friend| %>
+  <% if friend.avatar? %>
+    <%= image_tag friend.avatar, width: '300px' %>
+  <% else %>
+    <%= image_tag "/300x300.png" %>
+  <% end %>
+  <%= friend.name %>
+<% end %>
+
 
 
 
