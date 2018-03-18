@@ -20,4 +20,9 @@ class User < ApplicationRecord
 
   has_many :friendships, dependent: :destroy
   has_many :friendings, through: :friendships
+
+  def friending?(user)
+    self.friendings.include?(user)
+  end
+  
 end

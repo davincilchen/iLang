@@ -5,7 +5,6 @@
   <%= image_tag "/300x300.png" %>
 <% end %>
 <%= @user.username %>
-<%= simple_format @user.description %>
 
 <p>What I want to teach</p>
 <% @user.teaching_languages.each do |language|%>
@@ -16,4 +15,21 @@
 <% @user.learning_languages.each do |language| %>
   <%= language.name %>
 <% end %>
+
+<% if @user != current_user %>
+  <% if current_user.friending?(@user)%>
+    <%= link_to 'Unfriend', friendship_path(@user), method: :delete ,class: "btn btn-link" %>
+  <% else %>
+    <%= link_to 'Friend', friendships_path(friending_id: @user), method: :post , class: "btn btn-default" %>
+  <% end %>
+<% else %>
+  <%= link_to 'Edit profile', edit_user_path(current_user), class: "btn btn-default" %>
+<% end %>
+
+<%= simple_format @user.description %>
+
+<p>Friend List</p>
+
+
+
 
