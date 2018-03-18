@@ -6,6 +6,8 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		@learnings = current_user.learnings
+		@teachings = current_user.teachings
 
 	end
 
@@ -13,14 +15,22 @@ class UsersController < ApplicationController
 	end
 
 	def learning
-		@learning = current_user.learnings.build(language_id: params[:anguages])
-		@learning.save
-
+		params[:languages].each do |l|
+			puts "adding language #{l} for user #{current_user}"
+			@learning = current_user.learnings.new(language_id: l)
+			@learning.save
+		end
+		
+		redirect_back fallback_location: root_path
 	end
 
 	def teaching
-		@teaching = current_user.teachings.build(language_id: params[:languages])
-		@teaching.save
+		params[:languages].each do |l|
+			puts "adding language #{l} for user #{current_user}"
+			@teaching = current_user.teachings.new(language_id: l)
+			@teaching.save
+		end
+		redirect_back fallback_location: root_path
 	end
 
 	private
