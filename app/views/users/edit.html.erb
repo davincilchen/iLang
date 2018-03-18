@@ -1,0 +1,14 @@
+
+<% languages_array = Language.all.map { |language| [language.name, language.id] } %>
+
+<%= form_for @user, :url => learning_user_path(@user) do %>
+	<%= label_tag 'I want to learn' %>:
+	<%= select_tag "languages", options_for_select(languages_array)%>
+	<%= submit_tag %>
+<% end %>
+
+<%= form_for @user, :url => teaching_user_path(@user) do %>
+	<%= label_tag 'I want to teach' %>:
+	<%= select_tag "languages", options_for_select(languages_array)%>
+	<%= submit_tag %>
+<% end %>
