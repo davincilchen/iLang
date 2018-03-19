@@ -15,3 +15,24 @@
 
   <%= f.submit 'Update', class: "btn btn-default"%>
 <% end %>
+
+
+<% all_languages = Language.all.map { |language| [language.name, language.id] } %>
+<div class="container">
+	<div class="col-md-6">
+		<%= form_for @user, :url => learning_user_path(@user) do %>
+			<%= label_tag 'I want to learn' %>:
+			<%= select_tag 'languages', options_for_select(all_languages, @current_learnings), multiple: true, 'class'=>'form form-control', 'style'=>"height:350px"%>
+			<%= submit_tag %>
+		<% end %>
+	</div>
+	
+	<div class="col-md-6">
+		<%= form_for @user, :url => teaching_user_path(@user) do %>
+			<%= label_tag 'I want to teach' %>:
+			<%= select_tag "languages", options_for_select(all_languages, @current_teachings), multiple: true, 'class'=>'form form-control', 'style'=>"height:350px"%>
+			<%= submit_tag %>
+		<% end %>
+	</div>
+</div>
+

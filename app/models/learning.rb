@@ -1,4 +1,6 @@
 class Learning < ApplicationRecord
-  belongs_to :user
-  belongs_to :language
+	validates :language_id, uniqueness: { scope: :user_id}
+
+	belongs_to :user
+	belongs_to :language
 end

@@ -40,5 +40,5 @@
 <% end %>
 
 
-
-
+<% languages_array = Language.all.map { |language| [language.name, language.id] } %>
+<%= select_tag "learn_languages", options_for_select(languages_array)%>

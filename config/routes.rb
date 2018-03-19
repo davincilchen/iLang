@@ -6,10 +6,16 @@ Rails.application.routes.draw do
 
   resources :lessons, only: [:new, :create, :destroy] 
 
-  resources :users, only: [:index, :show, :edit, :update] do
+  resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
 
     collection do
       get :search
+    end
+
+    member do 
+      patch :learning
+      patch :teaching
+
     end
 
   end
