@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
+    @learning_languages = @user.learning_languages.pluck(:name).to_sentence
   end
 
   def edit
