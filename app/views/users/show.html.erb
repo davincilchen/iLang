@@ -1,11 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="user-profile-item">
-      <% if @user.avatar? %>
-        <%= image_tag @user.avatar, width: '150px' %>
-      <% else %>
-        <%= image_tag "/300x300.png", width: '150px' %>
-      <% end %>
+      <%= image_tag @user.avatar, width: '150px' %>
     </div>
     <div class="user-profile-item"> 
       <h3><%= @user.username %></h3>
@@ -35,12 +31,8 @@
 
     <% @user.friendings.each do |friend| %>
       <div class="thumbnail friend-list">
-      <% if friend.avatar? %>
         <%= link_to image_tag(friend.avatar, class: "user-avatar"), user_path(friend) %>
-      <% else %>
-        <%= link_to image_tag("/300x300.png", class: "user-avatar"), user_path(friend) %>
-      <% end %>
-      <%= link_to friend.username, user_path(friend) %>
+        <%= link_to friend.username, user_path(friend) %>
       </div>
     <% end %>
   </div>
