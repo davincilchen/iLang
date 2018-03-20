@@ -4,6 +4,17 @@
 
 .user-profile-item{
 	display: inline-block;
-	margin: 10px;
+	margin: 15px 15px 0px 0px;
+}
+
+.friend-list{
+	display: inline-block;
+	border: none;
+	text-align: center;
+}
+
+.user-avatar{
+	width: 100px;
+	border-radius: 100px;
 }
 

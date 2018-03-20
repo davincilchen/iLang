@@ -4,7 +4,7 @@
       <% if @user.avatar? %>
         <%= image_tag @user.avatar, width: '150px' %>
       <% else %>
-        <%= image_tag "/300x300.png" %>
+        <%= image_tag "/300x300.png", width: '150px' %>
       <% end %>
     </div>
     <div class="user-profile-item"> 
@@ -25,18 +25,23 @@
         <%= link_to 'Edit profile', edit_user_path(current_user), class: "btn btn-default" %>
       <% end %>
     </div>
-    <div class="row user-profile-item">
+    <div class="user-profile-item">
       <%= simple_format @user.description %>
     </div>
   </div>
-  <p>Friend List</p>
+  <br>
+  <div class="row">
+    <h4>Friend List</h4>
 
-  <% @user.friendings.each do |friend| %>
-    <% if friend.avatar? %>
-      <%= link_to image_tag(friend.avatar), user_path(friend) %>
-    <% else %>
-      <%= link_to image_tag("/300x300.png"), user_path(friend) %>
+    <% @user.friendings.each do |friend| %>
+      <div class="thumbnail friend-list">
+      <% if friend.avatar? %>
+        <%= link_to image_tag(friend.avatar, class: "user-avatar"), user_path(friend) %>
+      <% else %>
+        <%= link_to image_tag("/300x300.png", class: "user-avatar"), user_path(friend) %>
+      <% end %>
+      <%= link_to friend.username, user_path(friend) %>
+      </div>
     <% end %>
-    <%= link_to friend.username, user_path(friend) %>
-  <% end %>
+  </div>
 </div>
