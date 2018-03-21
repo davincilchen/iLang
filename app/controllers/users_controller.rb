@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show]
+  helper_method :sort_column, :sort_direction
 
 	def index
 		@users = User.all
@@ -8,6 +9,10 @@ class UsersController < ApplicationController
   def show
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
+
+
+    @lessons = Lesson.order(sort_column + " " + sort_direction)
+
   end
 
   def edit
@@ -70,6 +75,14 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :description, :avatar)
+  end
+
+  def sort_column
+    Lesson.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end

@@ -54,5 +54,16 @@ namespace :dev do
     puts "now you have #{Learning.count} learnings data"
   end
 
+  task fake_lesson: :environment do 
+    Lesson.destroy_all
+    20.times do |l|
+      title = FFaker::Locale::language
+      Lesson.create!(
+        title: title
+      )
+      puts "Lesson #{title} is created"
+    end
+    puts "Totally #{Lesson.count} lessons have been created"
+  end
 
 end
