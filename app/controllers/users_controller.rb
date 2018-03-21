@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:update, :edit, :learning, :teaching]
+	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show]
 
 	def index
 		@users = User.all
 	end
 
   def show
-    @user = User.find(params[:id])
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
   end
@@ -22,6 +21,20 @@ class UsersController < ApplicationController
 
   def update
     @user.update(user_params)
+
+    Learning.where(user: current_user).destroy_all
+    params[:learn_languages].each do |l|
+      puts "adding language #{l} for user #{current_user}"
+      @learning = current_user.learnings.new(language_id: l)
+      @learning.save
+    end
+
+    Teaching.where(user: current_user).destroy_all
+    params[:teach_languages].each do |l|
+      puts "adding language #{l} for user #{current_user}"
+      @teaching = current_user.teachings.new(language_id: l)
+      @teaching.save
+    end
     redirect_to user_path(@user)
   end
 
@@ -45,27 +58,6 @@ class UsersController < ApplicationController
       end
     end     
   end
-
-	def learning
-		Learning.where(user: current_user).destroy_all
-		params[:languages].each do |l|
-			puts "adding language #{l} for user #{current_user}"
-			@learning = current_user.learnings.new(language_id: l)
-			@learning.save
-		end
-		
-		redirect_back fallback_location: root_path
-	end
-
-	def teaching
-		Teaching.where(user: current_user).destroy_all
-		params[:languages].each do |l|
-			puts "adding language #{l} for user #{current_user}"
-			@teaching = current_user.teachings.new(language_id: l)
-			@teaching.save
-		end
-		redirect_back fallback_location: root_path
-	end
 
 
 	private
