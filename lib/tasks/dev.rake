@@ -30,7 +30,7 @@ namespace :dev do
  		Teaching.destroy_all
     Language.all.each do |language|
       3.times do |i|
-        language.teachings.create!(
+        language.teachings.create(
           user: User.all.sample
           )
       end
@@ -44,7 +44,7 @@ namespace :dev do
  		Learning.destroy_all
     Language.all.each do |language|
       3.times do |i|
-        language.learnings.create!(
+        language.learnings.create(
           user: User.all.sample
           )
       end
