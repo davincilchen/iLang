@@ -63,19 +63,22 @@ function myFunction() {
   <!-- http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true -->
   <h3>Lessons</h3>
 
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for title..">
-
-  <table class="pretty" id="myTable">
-    <tr>
-      <th><%= sortable "title" %></th>
-      <th><%= sortable "created_at" %></th>
-    </tr>
-    <% @lessons.each do |lesson| %>
+  
+  <table role="datatable">
+    <thead>
       <tr>
-        <td><%= lesson.title %></td>
-        <td><%= lesson.created_at %></td>
+        <th>title</th>
+        <th>created_at</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @lessons.each do |lesson| %>
+        <tr>
+          <td><%= lesson.title %></td>
+          <td><%= lesson.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 
 </div>
