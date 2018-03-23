@@ -21,6 +21,9 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friendings, through: :friendships
 
+  has_many :lessons, dependent: :destroy
+  has_many :languaging_lessons, through: :lessons, source: :language
+  
   def friending?(user)
     self.friendings.include?(user)
   end

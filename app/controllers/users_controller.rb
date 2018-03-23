@@ -10,8 +10,10 @@ class UsersController < ApplicationController
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
 
-
-    @lessons = Lesson.order(sort_column + " " + sort_direction)
+    respond_to do |format|
+      format.html
+      format.json { render json: UsersDatatable.new(view_context)}
+    end
 
   end
 
