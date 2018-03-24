@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show]
-  helper_method :sort_column, :sort_direction
-
+  
 	def index
 		@users = User.all
 	end
@@ -10,10 +9,6 @@ class UsersController < ApplicationController
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
 
-    respond_to do |format|
-      format.html
-      format.json { render json: UsersDatatable.new(view_context)}
-    end
 
   end
 

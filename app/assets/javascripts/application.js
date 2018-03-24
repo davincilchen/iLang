@@ -15,7 +15,10 @@
 //= require_tree .
 //= require jquery
 //= require bootstrap-sprockets
-//= require datatables
+//= require jquery_ujs
+//= require turbolinks
+//= require dataTables/jquery.dataTables
+
 
 $(document).on('turbolinks:load', function(){
   $("table[role='datatable']").each(function(){
