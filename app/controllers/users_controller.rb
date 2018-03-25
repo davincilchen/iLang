@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   def show
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
+    @lessons = Lesson.includes(:user, :language).where(user_id: params[:id]).search(params[:search]).order(sort_column + " " + sort_direction)
+
   end
 
   def edit
@@ -71,6 +73,15 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :description, :avatar)
+  end
+
+  def sort_column
+    Lesson.column_names.include?(params[:sort]) ? params[:sort] : "title"
+
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end

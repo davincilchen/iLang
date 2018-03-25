@@ -82,6 +82,7 @@ class LessonsController < ApplicationController
 
   def sort_column
     Lesson.column_names.include?(params[:sort]) ? params[:sort] : "title"
+
   end
   
   def sort_direction
