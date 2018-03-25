@@ -2,8 +2,15 @@ class LessonsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    
-    @lessons = Lesson.search(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(10)
+    @lessons = Lesson.includes(:user, :language).where(user_id: current_user).search(params[:search]).order(sort_column + " " + sort_direction)
+    # @lessons = Lesson.includes(:user, :language).all
+
+    # data = []
+    # @lessons.each do |lesson|
+    #   data.push(lesson.user.username)
+    # end
+
+    # render json: @lessons
   end
 
   def ui
@@ -81,7 +88,4 @@ class LessonsController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
-  def lesson_params
-    params.require(:lesson).permit(:title, :created_at)
-  end
 end

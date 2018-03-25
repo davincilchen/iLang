@@ -10,15 +10,13 @@
   <tr>
     <th><%= sortable "title" %></th>
     <th><%= sortable "created_at" %></th>
-    <th><%= sortable "username" %></th>
-    <th><%= sortable "name" %></th>
+    <th><%= sortable "language" %></th>
   </tr>
   <% @lessons.each do |lesson| %>
     <tr>
       <td><%= lesson.title %></td>
       <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
       <td><%= lesson.user.username %></td>
-      <td><%= lesson.language.name %></td>
     </tr>
   <% end %>
 </table>

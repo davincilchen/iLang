@@ -27,5 +27,6 @@ class User < ApplicationRecord
   def friending?(user)
     self.friendings.include?(user)
   end
-  
+
+
 end
