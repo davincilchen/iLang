@@ -6,12 +6,12 @@
   <div id="lessons"><%= render 'lessons' %></div>
 <% end %>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th><%= sortable "title" %></th>
     <th><%= sortable "created_at" %></th>
-    <th><%= sortable "username" %></th>
-    <th><%= sortable "name" %></th>
+    <th><%= "user" %></th>
+    <th><%= "language" %></th>
   </tr>
   <% @lessons.each do |lesson| %>
     <tr>

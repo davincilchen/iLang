@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  helper_method :sort_column, :sort_direction
 	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show]
   
 	def index
@@ -72,6 +72,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :description, :avatar)
   end
-
 
 end
