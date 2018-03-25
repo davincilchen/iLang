@@ -1,11 +1,25 @@
 <div class="container">
   <div class="col-md-12">
-    <%= render :partial => "shared/search"%>
+    <div class="row">
+      <h4>I am looking for someone who wants to</h4>
+      <!-- https://rails.ruby.tw/form_helpers.html -->
+
+      <form accept-charset="UTF-8" action="search" method="get">
+        <select name="option">
+          <option value="Teach">Teach</option>
+          <option value="Learn">Learn</option>
+        </select>
+        <!-- https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms -->
+        <%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "All Language"}) %>
+
+        <input type="submit" name="commit" value="Search" data-disable-with="Search">
+      </form>
+    </div>
   </div>
   <br>
   <div class="col-md-12">
     <% @users.each do |user| %>
-      <div class="thumbnail col-md-3">
+      <div class="thumbnail col-md-3 search-result">
         <div><%= link_to image_tag(user.avatar, class: "user-avatar"), user_path(user) %></div>
         <div><h3><%= link_to user.username, user_path(user) %></h3></div>
         <div>
