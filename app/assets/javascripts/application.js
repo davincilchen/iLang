@@ -12,20 +12,18 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
 //= require jquery
-//= require bootstrap-sprockets
 //= require jquery_ujs
-//= require turbolinks
-//= require dataTables/jquery.dataTables
+//= require bootstrap-sprockets
+//= require_tree .
 
-
-$(document).on('turbolinks:load', function(){
-  $("table[role='datatable']").each(function(){
-    $(this).DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: $(this).data('url')
-    });
+$(function() {
+  $("#lessons th a, #lessons .pagination a").live("click", function() {
+    $.getScript(this.href);
+    return false;
   });
-})
+  $("#lessons_search input").keyup(function() {
+    $.get($("#lessons_search").attr("action"), $("#lessons_search").serialize(), null, "script");
+    return false;
+  });
+});
