@@ -54,5 +54,17 @@ namespace :dev do
     puts "now you have #{Learning.count} learnings data"
   end
 
+  task fake_friendship: :environment do
+    Friendship.destroy_all
+    User.all.each do |user|
+      rand(1..10).times do
+        user.friendships.create(
+          friending_id: User.where.not(id: user.id).sample.id
+        )
+      end
+    end
 
+    puts "have created fake friendships"
+    puts "now you have #{Learning.count} friendships data"
+  end
 end
