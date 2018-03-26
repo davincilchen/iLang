@@ -25,6 +25,7 @@ class LessonsController < ApplicationController
         @lesson = current_user.learned_lessons.build(lesson_params)
         @lesson.teacher_id = params[:friendship][:id]     
       end
+      @lesson.generate_random_pad
       @lesson.language_id = params[:language][:id]
       if @lesson.save
         redirect_to lesson_path(@lesson)
