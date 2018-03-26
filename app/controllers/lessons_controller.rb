@@ -14,22 +14,26 @@ class LessonsController < ApplicationController
   end
 
   def create
-    if params[:role] == "teacher"
-      @lesson = current_user.teached_lessons.build(lesson_params)
-      @lesson.student_id = params[:friendship][:id]
+    if current_user.is_ongoing_lesson?
+      flash[:alert] = "There is an ongoing lesson, please finished it first!!"
+      redirect_to lessons_path
     else
-      @lesson = current_user.learned_lessons.build(lesson_params)
-      @lesson.teacher_id = params[:friendship][:id]     
-    end
-    @lesson.language_id = params[:language][:id]
-    if @lesson.save
-      redirect_to lesson_path(@lesson)
-    else
-      flash[:alert] = @lesson.errors.full_messages.to_sentence
-      redirect_to lesson_path(@lesson)
+      if params[:role] == "teacher"
+        @lesson = current_user.teached_lessons.build(lesson_params)
+        @lesson.student_id = params[:friendship][:id]
+      else
+        @lesson = current_user.learned_lessons.build(lesson_params)
+        @lesson.teacher_id = params[:friendship][:id]     
+      end
+      @lesson.language_id = params[:language][:id]
+      if @lesson.save
+        redirect_to lesson_path(@lesson)
+      else
+        flash[:alert] = @lesson.errors.full_messages.to_sentence
+        redirect_to lesson_path(@lesson)
+      end
     end
   end
-
 
   before_action :get_lesson, only: [:show, :update]
 
