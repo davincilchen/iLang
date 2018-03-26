@@ -21,13 +21,15 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friendings, through: :friendships
 
+  has_many :lessons, dependent: :destroy
+
   has_many :teached_lessons, class_name: "Lesson", foreign_key: "teacher_id"
   has_many :learned_lessons, class_name: "Lesson", foreign_key: "student_id"
 
   def friending?(user)
     self.friendings.include?(user)
   end
-  
+
 
   def is_ongoing_lesson?
     status = false
@@ -39,4 +41,5 @@ class User < ApplicationRecord
     end
     status
   end
+
 end

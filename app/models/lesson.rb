@@ -1,5 +1,7 @@
 class Lesson < ApplicationRecord
+
   validates_presence_of :title
+
   belongs_to :teacher, class_name: "User"
   belongs_to :student, class_name: "User"
   belongs_to :language
@@ -14,4 +16,13 @@ class Lesson < ApplicationRecord
     length.times { randomstring << chars[rand(chars.size)] }
     randomstring
   end
+
+  def self.search(search)
+    if search
+      where('title LIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
+
 end

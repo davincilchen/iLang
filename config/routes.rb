@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root "users#index"
 
+
   resources :lessons, only: [:index, :new, :create, :show, :update, :destroy] 
 
   resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
@@ -15,11 +16,13 @@ Rails.application.routes.draw do
     member do 
       patch :learning
       patch :teaching
-
+      get :lessons
     end
 
   end
 
   resources :friendships, only: [:create, :destroy]
+
+  get 'lessons/ui'
 
 end

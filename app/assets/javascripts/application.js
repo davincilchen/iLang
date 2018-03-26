@@ -13,7 +13,18 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery
+//= require jquery_ujs
 //= require etherpad
-//= require_tree .
 //= require bootstrap-sprockets
+//= require_tree .
 
+$(function() {
+  $("#lessons th a, #lessons .pagination a").live("click", function() {
+    $.getScript(this.href);
+    return false;
+  });
+  $("#lessons_search input").keyup(function() {
+    $.get($("#lessons_search").attr("action"), $("#lessons_search").serialize(), null, "script");
+    return false;
+  });
+});

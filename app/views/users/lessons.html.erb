@@ -1,0 +1,71 @@
+
+</script>
+
+<div class="container">
+  <div class="row">
+    <div class="user-profile-item">
+      <%= image_tag @user.avatar, width: '150px' %>
+    </div>
+    <div class="user-profile-item"> 
+      <h3><%= @user.username %></h3>
+    </div>
+    <div class="user-profile-item">
+      <h5>I want to teach: <%= @teaching_languages%> </h5>
+      <h5>I want to learn: <%= @learning_languages%></h5>
+    </div>
+    <div class="user-profile-item">
+      <% if @user != current_user %>
+        <% if current_user.friending?(@user)%>
+          <%= link_to 'Unfriend', friendship_path(@user), method: :delete ,class: "btn btn-link" %>
+        <% else %>
+          <%= link_to 'Friend', friendships_path(friending_id: @user), method: :post , class: "btn btn-default" %>
+        <% end %>
+      <% else %>
+        <%= link_to 'Edit profile', edit_user_path(current_user), class: "btn btn-default" %>
+      <% end %>
+    </div>
+    <div class="user-profile-item">
+      <%= simple_format @user.description %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <h4>Friend List</h4>
+
+    <% @user.friendings.each do |friend| %>
+      <div class="thumbnail friend-list">
+        <%= link_to image_tag(friend.avatar, class: "user-avatar"), user_path(friend) %>
+        <%= link_to friend.username, user_path(friend) %>
+      </div>
+    <% end %>
+  </div>
+  
+  <%= form_tag lessons_user_path(@user), :method => 'get', :id => "lessons_search" do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+  <% end %>
+
+  <table class="table table-striped">
+    <tr>
+      <th><%= sortable "title" %></th>
+      <th><%= sortable "created_at" %></th>
+      <th><%= "teacher" %></th>
+      <th><%= "student" %></th>
+      <th><%= "language" %></th>
+      <th><%= "action" %></th>
+
+    </tr>
+    <% @lessons.each do |lesson| %>
+      <tr>
+        <td><%= lesson.title %></td>
+        <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
+        <td><%= lesson.teacher.username %></td>
+        <td><%= lesson.student.username %></td>
+        <td><%= lesson.language.name %></td>
+        <td><%= link_to 'Go to the pad', lesson_path(lesson) %></td>
+      </tr>
+    <% end %>
+</table>
+</div>

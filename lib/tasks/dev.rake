@@ -54,6 +54,7 @@ namespace :dev do
     puts "now you have #{Learning.count} learnings data"
   end
 
+
   task fake_friendship: :environment do
     Friendship.destroy_all
     User.all.each do |user|

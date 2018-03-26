@@ -1,3 +1,6 @@
+
+</script>
+
 <div class="container">
   <div class="col-md-12">
     <div class="row">
@@ -40,4 +43,34 @@
       <% end %>
     </div>
   </div>
+  
+  <%= form_tag lessons_user_path(@user), :method => 'get', :id => "search" do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+    
+  <% end %>
+
+  <table class="table table-striped">
+    <tr>
+      <th><%= sortable "title" %></th>
+      <th><%= sortable("created_at") %></th>
+      <th><%= "teacher" %></th>
+      <th><%= "student" %></th>
+      <th><%= "language" %></th>
+      <th><%= "action" %></th>
+
+    </tr>
+    <% @lessons.each do |lesson| %>
+      <tr>
+        <td><%= lesson.title %></td>
+        <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
+        <td><%= lesson.teacher.username %></td>
+        <td><%= lesson.student.username %></td>
+        <td><%= lesson.language.name %></td>
+        <td><%= link_to 'Go to the pad', lesson_path(lesson) %></td>
+      </tr>
+    <% end %>
+</table>
 </div>
