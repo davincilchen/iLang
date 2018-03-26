@@ -14,13 +14,19 @@ class LessonsController < ApplicationController
   end
 
   def create
-    @lesson = Lesson.new(lesson_params)
-    if @lesson.save
-      flash[:notice] = "lesson was successfully created"
-      redirect_to root_path
+    if params[:role] == "teacher"
+      @lesson = current_user.teached_lessons.build(lesson_params)
+      @lesson.student_id = params[:friendship][:id]
     else
-      flash.now[:alert] = "lesson was failed to create"
-      render :new
+      @lesson = current_user.learned_lessons.build(lesson_params)
+      @lesson.teacher_id = params[:friendship][:id]     
+    end
+    @lesson.language_id = params[:language][:id]
+    if @lesson.save
+      redirect_to lesson_path(@lesson)
+    else
+      flash[:alert] = @lesson.errors.full_messages.to_sentence
+      redirect_to lesson_path(@lesson)
     end
   end
 
@@ -43,6 +49,6 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :content)
+    params.require(:lesson).permit(:title)
   end
 end
