@@ -53,6 +53,8 @@
       <th><%= sortable "created_at" %></th>
       <th><%= "user" %></th>
       <th><%= "language" %></th>
+      <th><%= "action" %></th>
+
     </tr>
     <% @lessons.each do |lesson| %>
       <tr>
@@ -60,6 +62,8 @@
         <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
         <td><%= lesson.user.username %></td>
         <td><%= lesson.language.name %></td>
+        <td><%= link_to 'Go to the pad', new_lesson_path(lesson) %></td>
+
       </tr>
     <% end %>
 </table>
