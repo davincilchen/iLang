@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
 
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson..where("teacher_id = ? or student_id = ?",current_user,current_user)
   end
 
   def new
