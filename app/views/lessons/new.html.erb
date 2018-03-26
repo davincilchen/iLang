@@ -1,18 +1,32 @@
-<% if @lesson.errors.any? %>
-  <h2>We have some errors here !</h2>
-  <ul>
-    <% @lesson.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div class="container">
+  <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+      <% if @lesson.errors.any? %>
+        <h2>We have some errors here !</h2>
+        <ul>
+          <% @lesson.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
 
-<%= form_for @lesson do |f| %>
-  <%= f.label :title, "Title" %>
-  <%= f.text_field :title %>
-
-  <%= f.label :content, "Content" %>
-  <%= f.text_area :content %>
-
-  <%= f.submit %>
-<% end %>
+      <%= form_for @lesson do |f| %>
+        <div class="form-group">
+          As
+          <%= select_tag "role", options_for_select([['teacher','teacher'],['student','student']]),include_blank: 'Role' %>
+          start lesson with 
+          <%= select "friendship", "id", current_user.friendships.all.collect {|p| [ p.friending.username, p.friending.id ] }, {prompt: "friend's name"} %>
+          for 
+          <%= collection_select(:language, :id, Language.all, :id, :name, options ={:include_blank => "Languages"}) %>
+        </div>
+        <div class="form-group">
+          <%= f.label :title, "Lesson Title:" %>
+          <%= f.text_field :title %>
+        </div>
+        <div>
+          <%= f.submit 'start', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
