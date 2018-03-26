@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   root "users#index"
 
-  resources :lessons, only: [:index, :new, :create, :destroy] 
+
+  resources :lessons, only: [:index, :new, :create, :show, :update, :destroy] 
 
   resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
 

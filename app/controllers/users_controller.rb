@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
-	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show]
+	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show, :lessons]
   
 	def index
 		@users = User.all
@@ -9,14 +9,13 @@ class UsersController < ApplicationController
   def show
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
-    @lessons = Lesson.where(user_id: params[:id]).order(sort_column + " " + sort_direction)
+    @lessons = Lesson.where(teacher_id: params[:id]).or(Lesson.where(student_id: params[:id])).order(sort_column + " " + sort_direction)
   end
 
   def lessons
-    @user = User.find(params[:id])
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
-    @lessons = Lesson.where(user_id: params[:id]).search(params[:search]).order(sort_column + " " + sort_direction)
+    @lessons = Lesson.where(teacher_id: params[:id]).or(Lesson.where(student_id: params[:id])).search(params[:search]).order(sort_column + " " + sort_direction)
   end
 
   def edit

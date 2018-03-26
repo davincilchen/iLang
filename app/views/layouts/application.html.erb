@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body>
@@ -28,8 +29,11 @@
           <ul class="pull-right text-right nav navbar-nav">
             <% if current_user %>
               <!-- TODO: 修改navbar的URL，連到對的地方 -->
-              <li><%= link_to('Join lesson', new_lesson_path) %></li>
-              <li><%= link_to('Start lesson', new_lesson_path) %></li>
+              <% if current_user.is_ongoing_lesson? %>
+                <li><%= link_to('Join lesson', lessons_path) %></li>
+              <% else %>
+                <li><%= link_to('Start lesson', new_lesson_path) %></li>
+              <% end %>
               <li><%= link_to('Search', users_path) %></li>
               <!-- user's avatar or dummy -->
               <% if current_user.avatar? %>

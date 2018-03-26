@@ -51,7 +51,8 @@
     <tr>
       <th><%= sortable "title" %></th>
       <th><%= sortable "created_at" %></th>
-      <th><%= "user" %></th>
+      <th><%= "teacher" %></th>
+      <th><%= "student" %></th>
       <th><%= "language" %></th>
       <th><%= "action" %></th>
 
@@ -60,10 +61,10 @@
       <tr>
         <td><%= lesson.title %></td>
         <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
-        <td><%= lesson.user.username %></td>
+        <td><%= lesson.teacher.username %></td>
+        <td><%= lesson.student.username %></td>
         <td><%= lesson.language.name %></td>
-        <td><%= link_to 'Go to the pad', new_lesson_path(lesson) %></td>
-
+        <td><%= link_to 'Go to the pad', lesson_path(lesson) %></td>
       </tr>
     <% end %>
 </table>

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Ongoing lessons</h2>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <td>Participant Name</td>
+            <td>Language</td>
+            <td>Tiltle</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <% if @lesson != nil %>
+          <tbody>
+            <tr>
+              <td>
+                <% if @lesson.teacher != current_user %>
+                  <%= link_to @lesson.teacher.username, user_path(@lesson.teacher) %>
+                <% else %>
+                  <%= link_to @lesson.student.username, user_path(@lesson.student) %>
+                <% end %>
+              </td>
+              <td>
+                <%= @lesson.language.name %>
+              </td>
+              <td>
+                <%= @lesson.title %>
+              </td>
+              <td>
+                <%= link_to 'show', lesson_path(@lesson) %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
