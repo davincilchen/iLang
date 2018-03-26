@@ -36,6 +36,17 @@ class LessonsController < ApplicationController
   def show
   end
 
+  def update
+    @lesson.status = "false"
+    if @lesson.update(lesson_content_param)
+      flash[:notice] = "lesson has completed"
+      redirect_to root_path
+    else
+      flash[:alert] = @lesson.errors.full_messages.to_sentence
+      render :show
+    end
+  end
+
   def destroy
     @lesson = Lesson.find(params[:id])
     @lesson.destroy
@@ -50,5 +61,9 @@ class LessonsController < ApplicationController
 
   def lesson_params
     params.require(:lesson).permit(:title)
+  end
+
+  def lesson_content_param
+    params.permit(:content)
   end
 end
