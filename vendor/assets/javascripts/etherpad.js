@@ -3,7 +3,7 @@
   $.fn.pad = function( options ) {
     var settings = {
       //'host'              : 'http://ilang-etherpad-lite.herokuapp.com',
-      'host'              : 'http://127.0.0.1:9001'
+      'host'              : 'http://127.0.0.1:9001',
       'baseUrl'           : '/p/',
       'showControls'      : true,
       'showChat'          : false,
