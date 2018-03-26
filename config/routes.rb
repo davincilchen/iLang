@@ -8,10 +8,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
 
-    resources :lessons, only: [:index] do
-     
-    end
-
     collection do
       get :search
     end
@@ -19,6 +15,7 @@ Rails.application.routes.draw do
     member do 
       patch :learning
       patch :teaching
+      get :lessons
     end
 
   end

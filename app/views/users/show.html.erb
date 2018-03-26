@@ -40,12 +40,12 @@
     <% end %>
   </div>
   
-   <%= form_tag lessons_path, :method => 'get', :id => "lessons_search" do %>
+  <%= form_tag lessons_user_path(@user), :method => 'get', :id => "search" do %>
     <p>
       <%= text_field_tag :search, params[:search] %>
       <%= submit_tag "Search", :name => nil %>
     </p>
-    <div id="lessons"><%= render 'lessons/lessons' %></div>
+    
   <% end %>
 
   <table class="table table-striped">
@@ -63,5 +63,5 @@
         <td><%= lesson.language.name %></td>
       </tr>
     <% end %>
-  </table>
+</table>
 </div>

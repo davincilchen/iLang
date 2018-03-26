@@ -9,8 +9,14 @@ class UsersController < ApplicationController
   def show
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
-    @lessons = Lesson.includes(:user, :language).where(user_id: params[:id]).search(params[:search]).order(sort_column + " " + sort_direction)
+    @lessons = Lesson.where(user_id: params[:id]).order(sort_column + " " + sort_direction)
+  end
 
+  def lessons
+    @user = User.find(params[:id])
+    @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
+    @learning_languages = @user.learning_languages.pluck(:name).to_sentence
+    @lessons = Lesson.where(user_id: params[:id]).search(params[:search]).order(sort_column + " " + sort_direction)
   end
 
   def edit
@@ -83,5 +89,6 @@ class UsersController < ApplicationController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
+
 
 end
