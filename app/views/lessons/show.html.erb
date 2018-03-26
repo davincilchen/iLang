@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <% if @lesson.status == true %>
+      <h2>Teacher <%= @lesson.teacher.username %></h2>
+      <h2>Student <%= @lesson.student.username %></h2>
+      <% end %>
+      <h2>Lesson Title: <%= @lesson.title %></h2>
+      <div id="PadBasic"></div>
+      <%= link_to 'Complete Lesson', lesson_path(@lesson), method: :patch, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+

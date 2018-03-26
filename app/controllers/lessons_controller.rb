@@ -24,6 +24,12 @@ class LessonsController < ApplicationController
     end
   end
 
+
+  before_action :get_lesson, only: [:show, :update]
+
+  def show
+  end
+
   def destroy
     @lesson = Lesson.find(params[:id])
     @lesson.destroy
@@ -32,6 +38,9 @@ class LessonsController < ApplicationController
   end
 
   private
+  def get_lesson
+    @lesson = Lesson.find(params[:id])
+  end
 
   def lesson_params
     params.require(:lesson).permit(:title, :content)
