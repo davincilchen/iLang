@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318060245) do
+ActiveRecord::Schema.define(version: 20180326090244) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 20180318060245) do
     t.boolean "status", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "teacher_id"
+    t.integer "student_id"
+    t.integer "language_id"
+    t.string "padID"
+    t.index ["language_id"], name: "index_lessons_on_language_id"
+    t.index ["student_id"], name: "index_lessons_on_student_id"
+    t.index ["teacher_id"], name: "index_lessons_on_teacher_id"
   end
 
   create_table "teachings", force: :cascade do |t|
