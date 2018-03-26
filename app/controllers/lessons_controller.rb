@@ -1,7 +1,12 @@
 class LessonsController < ApplicationController
 
   def index
-    @lessons = Lesson..where("teacher_id = ? or student_id = ?",current_user,current_user)
+    @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user)
+    @lessons.each do |lesson|
+      if lesson.status == true
+        @lesson = lesson
+      end
+    end
   end
 
   def new
