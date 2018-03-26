@@ -28,4 +28,15 @@ class User < ApplicationRecord
     self.friendings.include?(user)
   end
   
+
+  def is_ongoing_lesson?
+    status = false
+    @lessons = Lesson.where("teacher_id = ? or student_id = ?",self,self)
+    @lessons.each do |lesson|
+      if lesson.status == true
+        status = true
+      end
+    end
+    status
+  end
 end
