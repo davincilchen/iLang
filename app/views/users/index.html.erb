@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="col-md-12">
-		<div class="row">
-			<h4>I am looking for someone who wants to</h4>
+		
+			<h3>I am looking for someone who wants to</h3>
 			<!-- https://rails.ruby.tw/form_helpers.html -->
 
 			<form accept-charset="UTF-8" action="users/search" method="get">
@@ -12,8 +12,63 @@
 			  <!-- https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms -->
 			  <%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "All Language"}) %>
 
-			  <input type="submit" name="commit" value="Search" data-disable-with="Search">
+			  <input type="submit" class="btn btn-primary" name="commit" value="Search" data-disable-with="Search">
 			</form>
-		</div>
+		
+		<% if @lesson != nil %>
+			<h3>Ongoing lesson</h3>
+			<table class="table table-bordered table-striped">
+	        <thead>
+	          <tr>
+	            <td>Participant Name</td>
+	            <td>Language</td>
+	            <td>Tiltle</td>
+	            <td>Action</td>
+	          </tr>
+	        </thead>
+	          <tbody>
+	            <tr>
+	              <td>
+	                <% if @lesson.teacher != current_user %>
+	                  <%= link_to @lesson.teacher.username, user_path(@lesson.teacher) %>
+	                <% else %>
+	                  <%= link_to @lesson.student.username, user_path(@lesson.student) %>
+	                <% end %>
+	              </td>
+	              <td>
+	                <%= @lesson.language.name %>
+	              </td>
+	              <td>
+	                <%= @lesson.title %>
+	              </td>
+	              <td>
+	                <%= link_to 'show', lesson_path(@lesson) %>
+	              </td>
+	            </tr>
+	          </tbody>
+	      </table>
+	    <% end %>
+		<h3>My recent lessons</h3>
+    <table class="table table-striped">
+	    <tr>
+	      <th><%= sortable "title" %></th>
+	      <th><%= sortable("created_at") %></th>
+	      <th><%= "teacher" %></th>
+	      <th><%= "student" %></th>
+	      <th><%= "language" %></th>
+	      <th><%= "action" %></th>
+
+	    </tr>
+	    <% @recent_lessons.each do |lesson| %>
+	      <tr>
+	        <td><%= lesson.title %></td>
+	        <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
+	        <td><%= lesson.teacher.username %></td>
+	        <td><%= lesson.student.username %></td>
+	        <td><%= lesson.language.name %></td>
+	        <td><%= link_to 'Go to the pad', lesson_path(lesson) %></td>
+	      </tr>
+	    <% end %>
+	  </table>
 	</div>
 </div>

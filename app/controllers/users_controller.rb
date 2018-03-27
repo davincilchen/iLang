@@ -4,12 +4,20 @@ class UsersController < ApplicationController
   
 	def index
 		@users = User.all
+
+    @recent_lessons = Lesson.where(teacher_id: current_user).or(Lesson.where(student_id: current_user)).order(created_at: :desc)
+
+    @recent_lessons.each do |lesson|
+      if lesson.status == true
+        @lesson = lesson
+      end
+    end
 	end
 
   def show
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
-    @lessons = Lesson.where(teacher_id: params[:id]).or(Lesson.where(student_id: params[:id])).order(sort_column + " " + sort_direction)
+    @lessons = Lesson.where(teacher_id: params[:id]).or(Lesson.where(student_id: params[:id])).search(params[:search]).order(sort_column + " " + sort_direction)
   end
 
   def lessons
