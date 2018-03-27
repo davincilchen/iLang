@@ -45,6 +45,8 @@
   </div>
   
   <%= form_tag lessons_user_path(@user), :method => 'get', :id => "search" do %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
     <p>
       <%= text_field_tag :search, params[:search] %>
       <%= submit_tag "Search", :name => nil %>
@@ -56,10 +58,10 @@
     <tr>
       <th><%= sortable "title" %></th>
       <th><%= sortable("created_at") %></th>
-      <th><%= "teacher" %></th>
-      <th><%= "student" %></th>
-      <th><%= "language" %></th>
-      <th><%= "action" %></th>
+      <th><%= sortable "teacher" %></th>
+      <th><%= sortable "student" %></th>
+      <th><%= sortable "language" %></th>
+      <th><%= sortable "action" %></th>
 
     </tr>
     <% @lessons.each do |lesson| %>
