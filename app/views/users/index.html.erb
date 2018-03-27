@@ -51,8 +51,8 @@
 		<h3>My recent lessons</h3>
     <table class="table table-striped">
 	    <tr>
-	      <th><%= sortable "title" %></th>
-	      <th><%= sortable("created_at") %></th>
+	      <th><%= "title" %></th>
+	      <th><%= "created_at" %></th>
 	      <th><%= "teacher" %></th>
 	      <th><%= "student" %></th>
 	      <th><%= "language" %></th>
@@ -63,8 +63,13 @@
 	      <tr>
 	        <td><%= lesson.title %></td>
 	        <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
-	        <td><%= lesson.teacher.username %></td>
-	        <td><%= lesson.student.username %></td>
+	        <% if lesson.teacher != current_user %>
+	        	<td><%= link_to lesson.teacher.username, user_path(lesson.teacher) %></td>
+	        	<td><%= lesson.student.username %></td>
+	        <% else %>
+	        	<td><%= lesson.teacher.username %></td>
+						<td><%= link_to lesson.student.username, user_path(lesson.student) %></td>
+	        <% end %>
 	        <td><%= lesson.language.name %></td>
 	        <td><%= link_to 'Go to the pad', lesson_path(lesson) %></td>
 	      </tr>

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 	def index
 		@users = User.all
 
-    @recent_lessons = Lesson.where(teacher_id: current_user).or(Lesson.where(student_id: current_user)).order(created_at: :desc)
+    @recent_lessons = Lesson.where(teacher_id: current_user).or(Lesson.where(student_id: current_user)).order(created_at: :desc).limit(10)
 
     @recent_lessons.each do |lesson|
       if lesson.status == true
