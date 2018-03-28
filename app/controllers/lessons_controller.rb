@@ -33,7 +33,7 @@ class LessonsController < ApplicationController
         redirect_to lesson_path(@lesson)
       else
         flash[:alert] = @lesson.errors.full_messages.to_sentence
-        redirect_to lesson_path(@lesson)
+        redirect_to new_lesson_path
       end
     end
   end
@@ -50,7 +50,7 @@ class LessonsController < ApplicationController
       redirect_to root_path
     else
       flash[:alert] = @lesson.errors.full_messages.to_sentence
-      render :show
+      render :action => :show
     end
   end
 
