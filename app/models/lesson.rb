@@ -5,6 +5,8 @@ class Lesson < ApplicationRecord
   belongs_to :teacher, class_name: "User"
   belongs_to :student, class_name: "User"
   belongs_to :language
+
+  has_many :vocabs, dependent: :destroy
  
   def generate_random_pad
     self.padID = random_string
