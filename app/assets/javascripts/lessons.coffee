@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 #new頁面中 , role及friend select改變後都要執行ajax去取得相對應的languages
-傳入的參數為friendship_id及role
+#傳入的參數為friendship_id及role
 $ ->
 $(document).on 'change', '#friends_select,#role', (evt) ->
     $.ajax 'update_languages',
