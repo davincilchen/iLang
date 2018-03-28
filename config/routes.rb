@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   root "users#index"
 
-
-  resources :lessons, only: [:index, :new, :create, :show, :update, :destroy] 
-
+  resources :lessons, only: [:index, :new, :create, :show, :update, :destroy] do
+    collection do
+      get :update_languages
+    end
+  end
   resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
 
     collection do

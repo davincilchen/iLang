@@ -38,6 +38,28 @@ class LessonsController < ApplicationController
     end
   end
 
+
+  def update_languages
+    if params[:role] == ""
+      @role = "false"
+      respond_to do |format|
+        format.js { flash.now[:alert] = "Please select your role" }
+      end
+    elsif params[:friendship_id] == ""
+      @role = "true"
+    else
+      @user = User.find(params[:friendship_id])
+      if params[:role] == "teacher"
+        @languages = @user.teaching_languages
+      else
+        @languages = @user.learning_languages
+      end      
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
   before_action :get_lesson, only: [:show, :update]
 
   def show
