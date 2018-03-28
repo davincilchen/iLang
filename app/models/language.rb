@@ -6,10 +6,6 @@ class Language < ApplicationRecord
   has_many :learning_users, through: :learnings, source: :user
 
   has_many :lessons, dependent: :destroy
-
-  has_and_belongs_to_many :users
-
-  has_many :lessons, dependent: :destroy
   has_many :lessoning_users, through: :lessons, source: :user
 
 
