@@ -17,14 +17,3 @@
 //= require etherpad
 //= require bootstrap-sprockets
 //= require_tree .
-
-$(function() {
-  $("#lessons th a, #lessons .pagination a").live("click", function() {
-    $.getScript(this.href);
-    return false;
-  });
-  $("#lessons_search input").keyup(function() {
-    $.get($("#lessons_search").attr("action"), $("#lessons_search").serialize(), null, "script");
-    return false;
-  });
-});
