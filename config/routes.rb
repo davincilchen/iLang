@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root "users#index"
 
-  resources :lessons, only: [:index, :new, :create, :show, :update, :destroy] do
+  resources :lessons, only: [:index, :new, :create, :show, :update] do
     collection do
       get :update_languages
     end
