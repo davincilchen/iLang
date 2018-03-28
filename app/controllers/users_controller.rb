@@ -38,18 +38,41 @@ class UsersController < ApplicationController
   def update
     @user.update(user_params)
 
-    Learning.where(user: current_user).destroy_all
-    params[:learn_languages].each do |l|
-      puts "adding language #{l} for user #{current_user}"
-      @learning = current_user.learnings.new(language_id: l)
-      @learning.save
-    end
+    if params[:learn_languages] == nil && params[:teach_languages] == nil
+      flash[:notice] = "Profile updated"
 
-    Teaching.where(user: current_user).destroy_all
-    params[:teach_languages].each do |l|
-      puts "adding language #{l} for user #{current_user}"
-      @teaching = current_user.teachings.new(language_id: l)
-      @teaching.save
+    elsif params[:learn_languages] == nil && params[:teach_languages] != nil
+      Teaching.where(user: current_user).destroy_all
+      params[:teach_languages].each do |l|
+        puts "adding language #{l} for user #{current_user}"
+        @teaching = current_user.teachings.new(language_id: l)
+        @teaching.save
+      end
+      flash[:notice] = "Profile updated"
+    elsif params[:learn_languages] != nil && params[:teach_languages] == nil
+      Learning.where(user: current_user).destroy_all
+      params[:learn_languages].each do |l|
+        puts "adding language #{l} for user #{current_user}"
+        @learning = current_user.learnings.new(language_id: l)
+        @learning.save
+      end
+      flash[:notice] = "Profile updated"
+    else
+      Learning.where(user: current_user).destroy_all
+      params[:learn_languages].each do |l|
+        puts "adding language #{l} for user #{current_user}"
+        @learning = current_user.learnings.new(language_id: l)
+        @learning.save
+      end
+
+      Teaching.where(user: current_user).destroy_all
+      params[:teach_languages].each do |l|
+        puts "adding language #{l} for user #{current_user}"
+        @teaching = current_user.teachings.new(language_id: l)
+        @teaching.save
+
+      end
+      flash[:notice] = "Profile updated"
     end
     redirect_to user_path(@user)
   end
