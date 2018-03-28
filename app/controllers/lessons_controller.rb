@@ -20,19 +20,25 @@ class LessonsController < ApplicationController
       flash[:alert] = "There is an ongoing lesson, please finished it first!!"
       redirect_to lessons_path
     else
-      if params[:role] == "teacher"
-        @lesson = current_user.teached_lessons.build(lesson_params)
-        @lesson.student_id = params[:friendship][:id]
+      unless params[:role].blank? || params[:friendship][:id].blank? || params[:language][:id].blank? 
+        if params[:role] == "teacher"
+          @lesson = current_user.teached_lessons.build(lesson_params)
+          @lesson.student_id = params[:friendship][:id]
+        else
+          @lesson = current_user.learned_lessons.build(lesson_params)
+          @lesson.teacher_id = params[:friendship][:id]     
+        end
+        @lesson.generate_random_pad
+        @lesson.language_id = params[:language][:id]
+        if @lesson.save
+          redirect_to lesson_path(@lesson)
+        else
+          logger.debug "New error: #{@lesson.errors.full_messages.to_sentence}"
+          flash[:alert] = @lesson.errors.full_messages.to_sentence
+          redirect_to new_lesson_path
+        end
       else
-        @lesson = current_user.learned_lessons.build(lesson_params)
-        @lesson.teacher_id = params[:friendship][:id]     
-      end
-      @lesson.generate_random_pad
-      @lesson.language_id = params[:language][:id]
-      if @lesson.save
-        redirect_to lesson_path(@lesson)
-      else
-        flash[:alert] = @lesson.errors.full_messages.to_sentence
+        flash[:alert] = "Please select all item"
         redirect_to new_lesson_path
       end
     end
@@ -89,12 +95,10 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title)
+    params.require(:lesson).permit(:title, :teacher_id, :student_id, :language_id)
   end
 
   def lesson_content_param
     params.permit(:content)
   end
-
-
 end
