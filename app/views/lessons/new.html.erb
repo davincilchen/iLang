@@ -1,23 +1,14 @@
 <div class="container">
   <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
-      <% if @lesson.errors.any? %>
-        <h2>We have some errors here !</h2>
-        <ul>
-          <% @lesson.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      <% end %>
-
       <%= form_for @lesson do |f| %>
         <div class="form-group">
           As
           <%= select_tag "role", options_for_select([['teacher','teacher'],['student','student']]),include_blank: 'Role' %>
           start lesson with 
-          <%= select "friendship", "id", current_user.friendships.all.collect {|p| [ p.friending.username, p.friending.id ] }, {prompt: "friend's name"} %>
+          <%= select "friendship", "id", current_user.friendships.all.collect {|friendship| [ friendship.friending.username, friendship.friending.id ] }, {prompt: "friend's name"}, { id: 'friends_select' }  %>
           for 
-          <%= collection_select(:language, :id, Language.all, :id, :name, options ={:include_blank => "Languages"}) %>
+          <%= select "language", "id", Language.all.collect {|language| [ language.name, language.id ] }, {prompt: "Languages"}, { id: 'languages_select' }  %>
         </div>
         <div class="form-group">
           <%= f.label :title, "Lesson Title:" %>
