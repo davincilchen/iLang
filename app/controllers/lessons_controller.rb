@@ -42,7 +42,7 @@ class LessonsController < ApplicationController
           #若title為空 顯示錯誤訊息
           logger.debug "New error: #{@lesson.errors.full_messages.to_sentence}"
           flash[:alert] = @lesson.errors.full_messages.to_sentence
-          redirect_to new_lesson_path
+          render :action => :new
         end
       else
         #role friend language任一沒有被選擇 提示必須選取所有選項
@@ -82,9 +82,32 @@ class LessonsController < ApplicationController
   end
 
   def update
+    #url = "http://127.0.0.1:9001/api/1/getText?apikey=60ab94c4ffb59abc33b3b5dcb2e92af48ac0b2544fa3d8ff3d7d172f573ee7c2&padID=#{@lesson.padID}"
+    url = "http://ilang-etherpad-lite.herokuapp.com/api/1/getText?apikey=60ab94c4ffb59abc33b3b5dcb2e92af48ac0b2544fa3d8ff3d7d172f573ee7c2&padID=#{@lesson.padID}"
+    response = RestClient.get(url)
+    data = JSON.parse(response.body)
     @lesson.status = "false"
+    @lesson.content = data["data"]["text"]
     if @lesson.update(lesson_content_param)
-      flash[:notice] = "lesson has completed"
+      text = data["data"]["text"]
+      text.to_s.split("\n").each do |vocal|
+        @tmp_vocabs = Vocab.where("key = ?", vocal.to_s.split(":")[0])
+        if(!@tmp_vocabs.first)
+          @vocab = @lesson.vocabs.build(vocab_params)
+          @vocab.lesson_id = @lesson.id
+          @vocab.language_id = @lesson.language_id
+          @vocab.student_id = @lesson.student_id
+          @vocab.key = vocal.to_s.split(":")[0]
+          @vocab.value = vocal.to_s.split(":")[1]
+          if @vocab.save
+            flash[:notice] = "lesson has completed and Vocab has been saved"
+          else
+            flash[:alert] = @vocab.errors.full_messages.to_sentence
+          end
+        else
+          flash[:notice] = "lesson has completed"
+        end
+      end
       redirect_to root_path
     else
       flash[:alert] = @lesson.errors.full_messages.to_sentence
@@ -103,5 +126,9 @@ class LessonsController < ApplicationController
 
   def lesson_content_param
     params.permit(:content)
+  end
+
+  def vocab_params
+    params.permit(:lesson_id, :student_id, :language_id, :key, :value)
   end
 end
