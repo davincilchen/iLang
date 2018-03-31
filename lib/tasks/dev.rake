@@ -1,5 +1,5 @@
 namespace :dev do
-	task fake_language: :environment do 
+	task fake_languages: :environment do 
 		Language.destroy_all
 		20.times do |l|
 			name = FFaker::Locale::language
@@ -11,7 +11,7 @@ namespace :dev do
 		puts "Totally #{Language.count} languages have been created"
 	end
 
-	task fake_user: :environment do
+	task fake_users: :environment do
 		User.destroy_all
     20.times do |i|
       user_name = FFaker::Name.first_name
@@ -26,7 +26,7 @@ namespace :dev do
     puts "now you have #{User.count} users data"
   end
 
- 	task fake_teaching: :environment do
+ 	task fake_teachings: :environment do
  		Teaching.destroy_all
     Language.all.each do |language|
       3.times do |i|
@@ -40,7 +40,7 @@ namespace :dev do
     puts "now you have #{Teaching.count} teaching data"
   end
 
-  task fake_learning: :environment do
+  task fake_learnings: :environment do
  		Learning.destroy_all
     Language.all.each do |language|
       3.times do |i|
@@ -55,7 +55,7 @@ namespace :dev do
   end
 
 
-  task fake_friendship: :environment do
+  task fake_friendships: :environment do
     Friendship.destroy_all
     User.all.each do |user|
       rand(1..10).times do
@@ -69,6 +69,21 @@ namespace :dev do
     puts "now you have #{Learning.count} friendships data"
   end
 
+  task fake_lessons: :environment do
+    Lesson.destroy_all
+    20.times do |i|
+      Lesson.create!(
+        title: "fake lesson",
+        status: false,
+        teacher_id: User.all.sample.id,
+        student_id: User.all.sample.id,
+        language: Language.all.sample
+      )
+    end
+    puts "Totally #{Lesson.count} are created"
+  end
+
+
   task fake_vocabs: :environment do
     Vocab.destroy_all
     10.times do |i|
@@ -81,6 +96,6 @@ namespace :dev do
       )
 
     end
-    puts "#{Vocab.count} vocabs are created"
+    puts "Totally #{Vocab.count} vocabs are created"
   end
 end
