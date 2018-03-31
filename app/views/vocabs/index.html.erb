@@ -1,0 +1,15 @@
+<div class="container">
+    <% @vocabs.each do |vocab|%>
+    <div class="row">
+        <div class="col-md-6 flashcard-key">
+            <p><%= vocab.key %></p>
+        </div>
+        <div class="col-md-6 flashcard-value">
+            <p><%= vocab.value %></p>
+        </div>
+    </div>
+    <% end %>
+    <button>Previous</button>
+    <button>Flip</button>
+    <button>Next</button>
+</div>

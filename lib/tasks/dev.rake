@@ -86,7 +86,7 @@ namespace :dev do
 
   task fake_vocabs: :environment do
     Vocab.destroy_all
-    10.times do |i|
+    100.times do |i|
       Vocab.create!(
         language: Language.all.sample,
         student_id: User.all.sample.id,
