@@ -12,6 +12,11 @@ class UsersController < ApplicationController
         @lesson = lesson
       end
     end
+
+    if current_user.teaching_languages.count == 0 && current_user.learning_languages.count == 0
+      flash[:notice] = "Plase select the language that you want to teach or learn"
+      redirect_to edit_user_path(current_user)
+    end
 	end
 
   def show

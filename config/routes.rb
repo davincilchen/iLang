@@ -25,6 +25,5 @@ Rails.application.routes.draw do
 
   resources :friendships, only: [:create, :destroy]
 
-  get 'lessons/ui'
 
 end
