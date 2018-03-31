@@ -5,7 +5,7 @@
 #傳入的參數為friendship_id及role
 $ ->
 $(document).on 'change', '#friends_select,#role', (evt) ->
-    $.ajax 'update_languages',
+    $.ajax '/lessons/update_languages',
       type: 'GET'
       dataType: 'script'
       data: {

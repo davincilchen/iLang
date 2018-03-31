@@ -42,7 +42,7 @@ class LessonsController < ApplicationController
           #若title為空 顯示錯誤訊息
           logger.debug "New error: #{@lesson.errors.full_messages.to_sentence}"
           flash[:alert] = @lesson.errors.full_messages.to_sentence
-          redirect_to new_lesson_path
+          render :action => :new
         end
       else
         #role friend language任一沒有被選擇 提示必須選取所有選項
