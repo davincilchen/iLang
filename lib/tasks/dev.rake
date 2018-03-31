@@ -68,4 +68,19 @@ namespace :dev do
     puts "have created fake friendships"
     puts "now you have #{Learning.count} friendships data"
   end
+
+  task fake_vocabs: :environment do
+    Vocab.destroy_all
+    10.times do |i|
+      Vocab.create!(
+        language: Language.all.sample,
+        student_id: User.all.sample.id,
+        lesson: Lesson.all.sample,
+        key: "test_key",
+        value: "test_value"
+      )
+
+    end
+    puts "#{Vocab.count} vocabs are created"
+  end
 end
