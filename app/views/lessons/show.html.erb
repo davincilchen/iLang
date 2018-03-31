@@ -7,7 +7,11 @@
       <% end %>
       <h2>Lesson Title: <%= @lesson.title %></h2>
       <div id="PadBasic"></div>
-      <%= link_to 'Complete Lesson', lesson_path(@lesson), method: :patch, class: "btn btn-primary" %>
+      <% if current_user == @lesson.teacher %>
+        <%= link_to 'Complete Lesson', lesson_path(@lesson), method: :patch, class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to 'Back to index', users_path, class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>
