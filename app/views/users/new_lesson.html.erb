@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+      <%= form_for @lesson do |f| %>
+        <div class="form-group">
+          As
+          <%= select_tag "role", options_for_select([['teacher','teacher'],['student','student']]),include_blank: 'Role' %>
+          start lesson with 
+          <select id="friends_select" name="friendship[id]">
+            <option value="<%= @user.id %>"><%= @user.username %></option>
+          </select>
+          for 
+          <%= select "language", "id", Language.all.collect {|language| [ language.name, language.id ] }, {prompt: "Languages"}, { id: 'languages_select' }  %>
+        </div>
+        <div class="form-group">
+          <%= f.label :title, "Lesson Title:" %>
+          <%= f.text_field :title %>
+        </div>
+        <div>
+          <%= f.submit 'start', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

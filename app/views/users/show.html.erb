@@ -15,7 +15,7 @@
       <div class="user-profile-item">
         <% if @user != current_user %>
           <% if current_user.friending?(@user)%>
-            <%= link_to "Start lesson with #{@user.username}", new_lesson_path, class: "btn btn-primary" %>
+            <%= link_to "Start lesson with #{@user.username}", new_lesson_user_path(@user), class: "btn btn-primary" %>
             <%= link_to 'Unfriend', friendship_path(@user), method: :delete ,class: "btn btn-link" %>
           <% else %>
             <%= link_to 'Friend', friendships_path(friending_id: @user), method: :post , class: "btn btn-default" %>
@@ -57,10 +57,10 @@
     <tr>
       <th><%= sortable "title" %></th>
       <th><%= sortable("created_at") %></th>
-      <th><%= sortable "teacher" %></th>
-      <th><%= sortable "student" %></th>
-      <th><%= sortable "language" %></th>
-      <th><%= sortable "action" %></th>
+      <th><%= "teacher" %></th>
+      <th><%= "student" %></th>
+      <th><%= "language" %></th>
+      <th><%= "action" %></th>
 
     </tr>
     <% @lessons.each do |lesson| %>
