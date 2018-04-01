@@ -1,15 +1,23 @@
 <div class="container">
     <% @vocabs.each do |vocab|%>
     <div class="row flascard-item">
-        <div class="col-md-6 flashcard-key">
+        <div class="col-md-1"></div>
+        <div class="col-md-5 flashcard-key">
             <p><%= vocab.key %></p>
         </div>
-        <div class="col-md-6 flashcard-value">
+        <div class="col-md-5 flashcard-value">
             <p><%= vocab.value %></p>
         </div>
+        <div class="col-md-1"></div>
     </div>
     <% end %>
-    <button id="previous-flashcard">Previous</button>
-    <button id="flip-flashcard">Flip</button>
-    <button id="next-flashcard">Next</button>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button type = "button" class="btn btn-primary" id="previous-flashcard">Previous</button>
+            <button type = "button" class="btn btn-primary" id="flip-flashcard">Flip</button>
+            <button type = "button" class="btn btn-primary" id="next-flashcard">Next</button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
 </div>

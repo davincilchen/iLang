@@ -28,7 +28,25 @@
 	width: 250px;
 }
 
-.flashcard-value{
+.flashcard-value p{
 	display:none;
-	
+	text-align: center;
+}
+
+.flashcard-key p{
+	text-align: center;
+}
+
+.flashcard-value{
+	height: 100px;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 2px;
+}
+
+.flashcard-key{
+	height: 100px;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 2px;
 }

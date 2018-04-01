@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 	$("#flip-flashcard").on("click", function(event){
 		console.log("the button is clicked");
-		$(".flascard-item:visible .flashcard-value").css("display", "block");
+		$(".flascard-item:visible .flashcard-value p").css("display", "block");
 		DisableFlipButton();
 	})
 
@@ -36,7 +36,7 @@ $(document).ready(function(){
 
 function EnableFlipButton(){
 	$("#flip-flashcard").prop("disabled", false);
-    $("#flip-flashcard").css("color", "black")	
+    $("#flip-flashcard").css("color", "white")	
 }
 
 function DisableFlipButton(){
