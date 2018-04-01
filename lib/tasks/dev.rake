@@ -15,10 +15,14 @@ namespace :dev do
 		User.destroy_all
     20.times do |i|
       user_name = FFaker::Name.first_name
+      file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
+      client = FilestackClient.new('A6SyNX4ymRHOey4eMSXThz')
+      filelink = client.upload(filepath: file, multipart: false)
       User.create!(
         username: user_name,
         email: "#{user_name}@example.com",
         password: "12345678",
+        avatar: filelink.url
       )
     end
 

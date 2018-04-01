@@ -35,7 +35,7 @@ gem 'jquery-rails'
 gem 'carrierwave'
 gem 'rest-client'
 gem 'kaminari'
-
+gem 'filestack-rails', '~> 3.1.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
