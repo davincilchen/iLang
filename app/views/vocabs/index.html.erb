@@ -1,6 +1,6 @@
 <div class="container">
     <% @vocabs.each do |vocab|%>
-    <div class="row">
+    <div class="row flascard-item">
         <div class="col-md-6 flashcard-key">
             <p><%= vocab.key %></p>
         </div>
@@ -9,7 +9,7 @@
         </div>
     </div>
     <% end %>
-    <button>Previous</button>
+    <button id="previous-flashcard">Previous</button>
     <button id="flip-flashcard">Flip</button>
-    <button>Next</button>
+    <button id="next-flashcard">Next</button>
 </div>
