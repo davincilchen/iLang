@@ -84,9 +84,8 @@ namespace :dev do
         padID: randomstring
       )
     end
-    puts "Totally #{Lesson.count} are created"
+    puts "Totally #{Lesson.count} lessons are created"
   end
-
 
   task fake_vocabs: :environment do
     Vocab.destroy_all
@@ -102,4 +101,15 @@ namespace :dev do
     end
     puts "Totally #{Vocab.count} vocabs are created"
   end
+
+  task :rebuild_dev do
+    Rake::Task["dev:fake_users"].invoke
+    Rake::Task["dev:fake_languages"].invoke
+    Rake::Task["dev:fake_teachings"].invoke
+    Rake::Task["dev:fake_learnings"].invoke
+    Rake::Task["dev:fake_friendships"].invoke
+    Rake::Task["dev:fake_lessons"].invoke
+    Rake::Task["dev:fake_vocabs"].invoke
+  end
+
 end
