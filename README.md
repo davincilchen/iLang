@@ -48,4 +48,4 @@ change the setting to the local mode
 
 ## Authors
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/qscez2001/iLang/contributors) who participated in this project.
