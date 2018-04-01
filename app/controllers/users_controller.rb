@@ -113,7 +113,7 @@ class UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:username, :description, :avatar)
+    params.require(:user).permit(:username, :description, :avatar, :sort, :direction, :search)
   end
 
   def sort_column

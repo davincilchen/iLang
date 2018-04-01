@@ -259,6 +259,7 @@ DEPENDENCIES
   pg
   puma (~> 3.7)
   rails (~> 5.1.5)
+  rest-client
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
