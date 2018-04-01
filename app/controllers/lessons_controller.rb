@@ -87,7 +87,7 @@ class LessonsController < ApplicationController
   end
 
   def update
-    # url = "http://127.0.0.1:9001/api/1/getText?apikey=2113a5136cdc865146faab71c441141110311940d9c50c96080276eb6f781752&padID=#{@lesson.padID}"
+    #url = "http://127.0.0.1:9001/api/1/getText?apikey=60ab94c4ffb59abc33b3b5dcb2e92af48ac0b2544fa3d8ff3d7d172f573ee7c2&padID=#{@lesson.padID}"
     url = "http://ilang-etherpad-lite.herokuapp.com/api/1/getText?apikey=60ab94c4ffb59abc33b3b5dcb2e92af48ac0b2544fa3d8ff3d7d172f573ee7c2&padID=#{@lesson.padID}"
     response = RestClient.get(url)
     data = JSON.parse(response.body)
@@ -96,14 +96,20 @@ class LessonsController < ApplicationController
     if @lesson.update(lesson_content_param)
       text = data["data"]["text"]
       text.to_s.split("\n").each do |vocal|
-        @tmp_vocabs = Vocab.where("key = ?", vocal.to_s.split(":")[0])
-        if(!@tmp_vocabs.first)
+
+        @tmp_vocabs = vocal.to_s.split(" ")[0]
+        logger.debug vocal.to_s.split(" ")[0]
+        logger.debug vocal.to_s.split(" ")[1]
+        @tmp_key = Vocab.where("key = ?", @tmp_vocabs.to_s.split(":")[0])
+        if(!@tmp_key.first)
           @vocab = @lesson.vocabs.build(vocab_params)
           @vocab.lesson_id = @lesson.id
           @vocab.language_id = @lesson.language_id
           @vocab.student_id = @lesson.student_id
-          @vocab.key = vocal.to_s.split(":")[0]
-          @vocab.value = vocal.to_s.split(":")[1]
+	  logger.debug @tmp_vocabs.to_s.split(":")[0]
+	  logger.debug @tmp_vocabs.to_s.split(":")[1]
+          @vocab.key = @tmp_vocabs.to_s.split(":")[0]
+          @vocab.value = @tmp_vocabs.to_s.split(":")[1]
           if @vocab.save
             flash[:notice] = "lesson has completed and Vocab has been saved"
           else
