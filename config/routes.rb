@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     member do 
       patch :learning
       patch :teaching
-      get :lessons
+      get :search_lessons
     end
 
   end
