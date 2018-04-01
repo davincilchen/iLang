@@ -36,6 +36,7 @@
                 <li><%= link_to('Start lesson', new_lesson_path) %></li>
               <% end %>
               <li><%= link_to('Search', users_path) %></li>
+              <li><%= link_to('Flashcards', vocabs_path) %></li>
               <!-- user's avatar or dummy -->
               <% if current_user.avatar? %>
                 <li><%= link_to image_tag(current_user.avatar, height: '30', width: '30'), user_path(current_user) %></li>

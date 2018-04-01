@@ -86,13 +86,13 @@ namespace :dev do
 
   task fake_vocabs: :environment do
     Vocab.destroy_all
-    100.times do |i|
+    500.times do |i|
       Vocab.create!(
         language: Language.all.sample,
         student_id: User.all.sample.id,
         lesson: Lesson.all.sample,
-        key: "test_key",
-        value: "test_value"
+        key: FFaker::LoremKR::word,
+        value: FFaker::LoremCN::word
       )
 
     end
