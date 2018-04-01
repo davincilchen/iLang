@@ -44,7 +44,6 @@ class UsersController < ApplicationController
     @user.update(user_params)
 
     if params[:learn_languages] == nil && params[:teach_languages] == nil
-      flash[:notice] = "Profile updated"
 
     elsif params[:learn_languages] == nil && params[:teach_languages] != nil
       Teaching.where(user: current_user).destroy_all
@@ -53,7 +52,6 @@ class UsersController < ApplicationController
         @teaching = current_user.teachings.new(language_id: l)
         @teaching.save
       end
-      flash[:notice] = "Profile updated"
     elsif params[:learn_languages] != nil && params[:teach_languages] == nil
       Learning.where(user: current_user).destroy_all
       params[:learn_languages].each do |l|
@@ -61,7 +59,6 @@ class UsersController < ApplicationController
         @learning = current_user.learnings.new(language_id: l)
         @learning.save
       end
-      flash[:notice] = "Profile updated"
     else
       Learning.where(user: current_user).destroy_all
       params[:learn_languages].each do |l|
@@ -77,9 +74,9 @@ class UsersController < ApplicationController
         @teaching.save
 
       end
-      flash[:notice] = "Profile updated"
     end
-    redirect_to user_path(@user)
+    flash[:notice] = "Profile updated"
+    redirect_to root_path
   end
 
 
