@@ -71,9 +71,9 @@ class LessonsController < ApplicationController
     else
       @user = User.find(params[:friendship_id])
       if params[:role] == "teacher"
-        @languages = @user.teaching_languages
-      else
         @languages = @user.learning_languages
+      else
+        @languages = @user.teaching_languages
       end      
       respond_to do |format|
         format.js
