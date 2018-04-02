@@ -116,4 +116,11 @@ namespace :dev do
     Rake::Task["dev:fake_vocabs"].invoke
   end
 
+  task update_logo: :environment do
+    file = File.open("#{Rails.root}/public/logo.png")
+    client = FilestackClient.new('A6SyNX4ymRHOey4eMSXThz')
+    client.upload(filepath: file, multipart: false)
+
+    puts "update logo pic"
+  end
 end
