@@ -6,7 +6,11 @@
   <%= form_for @user do |f| %>
   <div class="col-md-6">
     <div class="user-profile-item">
-      <%= image_tag @user.avatar, width: '150px' %>
+      <%  if @user.avatar? %>
+        <%= image_tag @user.avatar, width: '150px'  %>
+      <% else %>
+        <%= image_tag "https://cdn.filestackcontent.com/I9zuHhNSKWdy9PlGGUHS", width: '150px'  %>
+      <% end %>
       <%= f.filestack_field :avatar, 'Upload Your Avatar!',  pickerOptions: { accept: 'image/*' }, id: 'unique-id', class: "form-control" %>
     </div>
   </div>
