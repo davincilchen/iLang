@@ -123,4 +123,12 @@ namespace :dev do
 
     puts "update logo pic"
   end
+
+  task update_profile: :environment do
+    file = File.open("#{Rails.root}/public/profile.png")
+    client = FilestackClient.new('A6SyNX4ymRHOey4eMSXThz')
+    client.upload(filepath: file, multipart: false)
+
+    puts "update profile pic"
+  end  
 end
