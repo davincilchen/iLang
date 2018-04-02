@@ -39,9 +39,9 @@
     <% @user.friendings.each do |friend| %>
       <div class="thumbnail friend-list">
         <% if friend.avatar? %>
-          <%= link_to image_tag("https://cdn.filestackcontent.com/I9zuHhNSKWdy9PlGGUHS", class: "user-avatar"), user_path(friend) %>
-        <% else %>
           <%= link_to image_tag(friend.avatar, class: "user-avatar"), user_path(friend) %>
+        <% else %>
+          <%= link_to image_tag("https://cdn.filestackcontent.com/I9zuHhNSKWdy9PlGGUHS", class: "user-avatar"), user_path(friend) %> 
         <% end %>
         <%= link_to friend.username, user_path(friend) %>
       </div>
