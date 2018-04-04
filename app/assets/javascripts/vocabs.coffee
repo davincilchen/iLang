@@ -34,7 +34,7 @@ $(document).on 'turbolinks:load', ->
     true
   $('#flip-flashcard').on 'click', (event) ->
     console.log 'the button is clicked'
-    $('.flascard-item:visible .flashcard-value p').css 'display', 'block'
+    $('.flascard-item:visible .flashcard-value span').css 'display', 'inline-block'
     DisableFlipButton()
     return
   return
