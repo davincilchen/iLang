@@ -28,13 +28,22 @@
 	width: 250px;
 }
 
-.flashcard-value p{
+.flashcard-value span{
 	display:none;
+	line-height: 95px;
+	width: 100%;
 	text-align: center;
+	vertical-align: middle;
+	font-size: 20px;
 }
 
-.flashcard-key p{
+.flashcard-key span{
+	display: inline-block;
+	line-height: 95px;
+	width: 100%;
 	text-align: center;
+	vertical-align: middle;
+	font-size: 20px;
 }
 
 .flashcard-value{
