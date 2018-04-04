@@ -75,10 +75,10 @@ namespace :dev do
 
   task fake_lessons: :environment do
     Lesson.destroy_all
-    chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-    randomstring = ''
-    10.times { randomstring << chars[rand(chars.size)] }
     20.times do |i|
+      chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+      randomstring = ''
+      10.times { randomstring << chars[rand(chars.size)] }
       Lesson.create!(
         title: "fake lesson",
         status: false,
