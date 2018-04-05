@@ -36,6 +36,7 @@ gem 'carrierwave'
 gem 'rest-client'
 gem 'kaminari'
 gem 'filestack-rails', '~> 3.1.0'
+gem 'simple-line-icons-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

@@ -1,5 +1,5 @@
 class VocabsController < ApplicationController
-	def index
+  def index
 		@vocabs = current_user.vocabs
 	end 
 end

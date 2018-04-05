@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, except: :landing
   helper_method :sort_column, :sort_direction
 	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show, :search_lessons]
   
@@ -103,6 +104,12 @@ class UsersController < ApplicationController
   def new_lesson
     @lesson = Lesson.new
     @user = User.find(params[:id])
+  end
+
+  def landing
+    if user_signed_in?
+      redirect_to users_path
+    end
   end
 
 
