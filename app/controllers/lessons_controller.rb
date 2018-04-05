@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-
+  
   #index action 用來找出是否有ongoing lesson
   def index
     #找出所有自己上過或者正要上的課
@@ -87,7 +87,7 @@ class LessonsController < ApplicationController
   end
 
   def update
-    # url = "http://127.0.0.1:9001/api/1/getText?apikey=60ab94c4ffb59abc33b3b5dcb2e92af48ac0b2544fa3d8ff3d7d172f573ee7c2&padID=#{@lesson.padID}"
+    # url = "http://127.0.0.1:9001/api/1/getText?apikey=2113a5136cdc865146faab71c441141110311940d9c50c96080276eb6f781752&padID=#{@lesson.padID}"
     url = "http://ilang-etherpad-lite.herokuapp.com/api/1/getText?apikey=60ab94c4ffb59abc33b3b5dcb2e92af48ac0b2544fa3d8ff3d7d172f573ee7c2&padID=#{@lesson.padID}"
     response = RestClient.get(url)
     data = JSON.parse(response.body)
