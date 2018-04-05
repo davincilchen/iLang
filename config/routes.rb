@@ -29,4 +29,5 @@ Rails.application.routes.draw do
 
   resources :vocabs
 
+  resources :reviews, only: [:index]
 end
