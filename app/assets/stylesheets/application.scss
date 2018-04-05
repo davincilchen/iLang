@@ -69,3 +69,15 @@
 .flashcard-buttons button{
 	margin: 0px 5px 0px 0px;
 }
+
+.button-links{
+	height: 100px;
+	border: 1px solid black;
+	border-radius: 5px;
+	display: inline-block;
+	margin: 0px 5px 0px 0px;
+	font-size: 20px;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
