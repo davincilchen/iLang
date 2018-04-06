@@ -4,12 +4,13 @@ Rails.application.routes.draw do
 
   # root "users#index"
   root "users#landing"
-
+ 
   resources :lessons, only: [:index, :new, :create, :show, :update] do
     collection do
       get :update_languages
     end
   end
+
   resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
 
     collection do
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
     end
 
   end
+
+  get '/home', to: 'users#home', as: 'home'
 
   resources :friendships, only: [:create, :destroy]
 

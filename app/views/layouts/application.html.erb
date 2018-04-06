@@ -35,12 +35,12 @@
               <!-- TODO: 修改navbar的URL，連到對的地方 -->
               <!-- 根據使用者目前是否有進行中的課程顯示加入課程或開啟課程 -->
               <% if current_user.is_ongoing_lesson? %>
-                <li><%= link_to('Join lesson', lessons_path) %></li>
+                <li><%= link_to('開始上課', lessons_path) %></li>
               <% else %>
-                <li><%= link_to('Start lesson', new_lesson_path) %></li>
+                <li><%= link_to('開始上課', new_lesson_path) %></li>
               <% end %>
-              <li><%= link_to('Search', users_path) %></li>
-              <li><%= link_to('Review', reviews_path) %></li>
+              <li><%= link_to('找朋友', users_path) %></li>
+              <li><%= link_to('複習', reviews_path) %></li>
               <!-- user's avatar or dummy -->
               <% if current_user.avatar? %>
                 <li><%= link_to image_tag(current_user.avatar, height: '30', width: '30'), user_path(current_user) %></li>
@@ -58,7 +58,7 @@
         </div>
       </div>
     </nav>
-          
+    
     <% if flash[:notice] %>
     <div class="container">
       <div class="row">

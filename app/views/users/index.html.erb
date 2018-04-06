@@ -1,79 +1,35 @@
 <div class="container">
 	<div class="col-md-12">
-		
-			<h3>I am looking for someone who wants to</h3>
 			<!-- https://rails.ruby.tw/form_helpers.html -->
-
 			<form accept-charset="UTF-8" action="users/search" method="get">
-			  <select name="option">
-			    <option value="Teach">Teach</option>
-			    <option value="Learn">Learn</option>
-			  </select>
-			  <!-- https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms -->
-			  <%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "All Language"}) %>
-
-			  <input type="submit" class="btn btn-primary" name="commit" value="Search" data-disable-with="Search">
+				<h3>我想要找 </h3>
+				<select name="option">
+				<option value="Teach">教</option>
+				<option value="Learn">學</option>
+				</select>
+				<!-- https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms -->
+				<%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "選擇語言"}) %>
+				<h3>的朋友</h3>
+				<input type="submit" class="btn btn-primary" name="commit" value="確認" data-disable-with="Search">
 			</form>
-		
-		<% if @lesson != nil %>
-			<h3>Ongoing lesson</h3>
-			<table class="table table-bordered table-striped">
-	        <thead>
-	          <tr>
-	            <td>Participant Name</td>
-	            <td>Language</td>
-	            <td>Tiltle</td>
-	            <td>Action</td>
-	          </tr>
-	        </thead>
-	          <tbody>
-	            <tr>
-	              <td>
-	                <% if @lesson.teacher != current_user %>
-	                  <%= link_to @lesson.teacher.username, user_path(@lesson.teacher) %>
-	                <% else %>
-	                  <%= link_to @lesson.student.username, user_path(@lesson.student) %>
-	                <% end %>
-	              </td>
-	              <td>
-	                <%= @lesson.language.name %>
-	              </td>
-	              <td>
-	                <%= @lesson.title %>
-	              </td>
-	              <td>
-	                <%= link_to 'show', lesson_path(@lesson) %>
-	              </td>
-	            </tr>
-	          </tbody>
-	      </table>
-	    <% end %>
-		<h3>My recent lessons</h3>
-    <table class="table table-striped">
-	    <tr>
-	      <th><%= "title" %></th>
-	      <th><%= "created_at" %></th>
-	      <th><%= "teacher" %></th>
-	      <th><%= "student" %></th>
-	      <th><%= "language" %></th>
-	      <th><%= "action" %></th>
-
-	    </tr>
-	    <% @recent_lessons.each do |lesson| %>
-	      <tr>
-	        <td><%= lesson.title %></td>
-	        <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
-	        <% if lesson.teacher != current_user %>
-	        	<td><%= link_to lesson.teacher.username, user_path(lesson.teacher) %></td>
-	        	<td><%= lesson.student.username %></td>
-	        <% else %>
-	        	<td><%= lesson.teacher.username %></td>
-						<td><%= link_to lesson.student.username, user_path(lesson.student) %></td>
-	        <% end %>
-	        <td><%= lesson.language.name %></td>
-	        <td><%= link_to 'Go to the pad', lesson_path(lesson) %></td>
-	      </tr>
-	    <% end %>
-	  </table>
 	</div>
+	<br>
+	  <div class="col-md-12">
+	    <% @users.each do |user| %>
+	      <div class="thumbnail col-md-3 search-result">
+	        <div>
+	          <% if user.avatar? %>
+	            <%= link_to image_tag(user.avatar, class: "user-avatar"), user_path(user) %>
+	          <% else %>
+	            <%= link_to image_tag("https://cdn.filestackcontent.com/I9zuHhNSKWdy9PlGGUHS", class: "user-avatar"), user_path(user) %> 
+	          <% end %>
+	        </div>
+	        <div><h3><%= link_to user.username, user_path(user) %></h3></div>
+	        <div>
+	          <h5>Teaching: <%= user.teaching_languages.pluck(:name).to_sentence%> </h5>
+	          <h5>Learning: <%= user.learning_languages.pluck(:name).to_sentence%></h5>
+	        </div>
+	      </div>
+	    <% end %>
+	  </div>
 </div>
