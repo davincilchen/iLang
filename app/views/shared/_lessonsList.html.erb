@@ -1,11 +1,13 @@
+<h3>我的課程列表</h3>
 <table class="table table-striped">
     <tr>
-        <th><%= "title" %></th>
-        <th><%= "created_at" %></th>
-        <th><%= "teacher" %></th>
-        <th><%= "student" %></th>
-        <th><%= "language" %></th>
-        <th><%= "action" %></th>
+        <th><%= "課程主旨" %></th>
+        <th><%= "日期時間" %></th>
+        <th><%= "教師" %></th>
+        <th><%= "學生" %></th>
+        <th><%= "語言" %></th>
+        <th><%= "狀態" %></th>
+        <th><%= "操作" %></th>
     </tr>
     <% lessons.each do |lesson| %>
         <tr>
@@ -16,10 +18,15 @@
                 <td><%= lesson.student.username %></td>
             <% else %>
                 <td><%= lesson.teacher.username %></td>
-                        <td><%= link_to lesson.student.username, user_path(lesson.student) %></td>
+                <td><%= link_to lesson.student.username, user_path(lesson.student) %></td>
             <% end %>
             <td><%= lesson.language.name %></td>
-            <td><%= link_to 'Go to the pad', lesson_path(lesson) %></td>
+            <% if lesson.status == true %>
+                <td><%= "進行中"%></td>
+            <% else %>
+                <td><%= "已完成"%></td>
+            <% end %>
+            <td><%= link_to lesson_path(lesson) do%><i class="glyphicon glyphicon-open" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><% end %></td>
         </tr>
     <% end %>
 </table>
