@@ -1,18 +1,17 @@
 <div class="container">
   <div class="col-md-12">
     <div class="row">
-      <h4>I am looking for someone who wants to</h4>
       <!-- https://rails.ruby.tw/form_helpers.html -->
-
       <form accept-charset="UTF-8" action="search" method="get">
+        <h3>我想要找 </h3>
         <select name="option">
-          <option value="Teach">Teach</option>
-          <option value="Learn">Learn</option>
+        <option value="Teach">教</option>
+        <option value="Learn">學</option>
         </select>
         <!-- https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms -->
-        <%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "All Language"}) %>
-
-        <input type="submit" name="commit" value="Search" data-disable-with="Search">
+        <%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "選擇語言"}) %>
+        <h3>的朋友</h3>
+        <input type="submit" class="btn btn-primary" name="commit" value="確認" data-disable-with="Search">
       </form>
     </div>
   </div>
