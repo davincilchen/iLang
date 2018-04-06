@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :update_languages
     end
   end
+
   resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
 
     collection do
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
     end
 
   end
+
+  get '/:home', to: 'users#home', as: 'home'
 
   resources :friendships, only: [:create, :destroy]
 

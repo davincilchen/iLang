@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
 	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show, :search_lessons]
   
+  def home
+  end
+
 	def index
 		@users = User.all
 
