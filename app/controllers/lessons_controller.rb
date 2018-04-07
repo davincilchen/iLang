@@ -96,27 +96,24 @@ class LessonsController < ApplicationController
     if @lesson.update(lesson_content_param)
       text = data["data"]["text"]
       text.to_s.split("\n").each do |vocal|
-
-        @tmp_vocabs = vocal.to_s.split(" ")[0]
-        logger.debug vocal.to_s.split(" ")[0]
-        logger.debug vocal.to_s.split(" ")[1]
-        @tmp_key = Vocab.where("key = ?", @tmp_vocabs.to_s.split(":")[0])
-        if(!@tmp_key.first)
-          @vocab = @lesson.vocabs.build(vocab_params)
-          @vocab.lesson_id = @lesson.id
-          @vocab.language_id = @lesson.language_id
-          @vocab.student_id = @lesson.student_id
-	  logger.debug @tmp_vocabs.to_s.split(":")[0]
-	  logger.debug @tmp_vocabs.to_s.split(":")[1]
-          @vocab.key = @tmp_vocabs.to_s.split(":")[0]
-          @vocab.value = @tmp_vocabs.to_s.split(":")[1]
-          if @vocab.save
-            flash[:notice] = "lesson has completed and Vocab has been saved"
+        if vocal.to_s.split(":")[1] != nil
+          @tmp_vocabs = vocal.to_s.split(" ")[0]
+          @tmp_key = Vocab.where("key = ?", @tmp_vocabs.to_s.split(":")[0])
+          if(!@tmp_key.first)
+            @vocab = @lesson.vocabs.build(vocab_params)
+            @vocab.lesson_id = @lesson.id
+            @vocab.language_id = @lesson.language_id
+            @vocab.student_id = @lesson.student_id
+            @vocab.key = @tmp_vocabs.to_s.split(":")[0]
+            @vocab.value = @tmp_vocabs.to_s.split(":")[1]
+            if @vocab.save
+              flash[:notice] = "lesson has completed and Vocab has been saved"
+            else
+              flash[:alert] = @vocab.errors.full_messages.to_sentence
+            end
           else
-            flash[:alert] = @vocab.errors.full_messages.to_sentence
+            flash[:notice] = "lesson has completed"
           end
-        else
-          flash[:notice] = "lesson has completed"
         end
       end
       redirect_to root_path
