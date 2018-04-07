@@ -29,7 +29,11 @@ Rails.application.routes.draw do
 
   resources :friendships, only: [:create, :destroy]
 
-  resources :vocabs
+  resources :vocabs do
+    collection do
+      get :search_vocabs
+    end
+  end
 
   resources :reviews, only: [:index]
 end
