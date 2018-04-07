@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
+  resources :users, only: [:show, :edit, :update, :create, :destroy] do
 
     collection do
       get :search
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     member do 
       patch :learning
       patch :teaching
-      get :search_lessons
       get :new_lesson
     end
 

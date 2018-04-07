@@ -1,8 +1,8 @@
 <h3>我的課程列表</h3>
 <table class="table table-striped">
     <tr>
-        <th><%= "課程主旨" %></th>
-        <th><%= "日期時間" %></th>
+        <th><%= sortable "title" %></th>
+        <th><%= sortable("created_at") %></th>
         <th><%= "教師" %></th>
         <th><%= "學生" %></th>
         <th><%= "語言" %></th>
