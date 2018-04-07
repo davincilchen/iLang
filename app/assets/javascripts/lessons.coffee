@@ -16,3 +16,14 @@ $(document).on 'change', '#friends_select,#role', (evt) ->
         console.log("AJAX Error: #{textStatus}")
       success: (data, textStatus, jqXHR) ->
         console.log("Dynamic friend select OK!")
+
+$(document).on 'turbolinks:load', ->
+  console.log $.cookie('dismiss')
+  if $.cookie('dismiss') == undefined
+    $('#myModal').modal()
+    $('.save').click ->
+      status = $('input[name=dismiss]').is(':checked')
+      console.log status
+      if status == true
+        document.cookie = 'dismiss=true'
+  return
