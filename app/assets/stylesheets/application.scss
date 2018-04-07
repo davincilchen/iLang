@@ -51,14 +51,14 @@
 	height: 100px;
 	border: 1px solid black;
 	border-radius: 5px;
-	margin: 2px;
+	margin: 5px;
 }
 
 .flashcard-key{
 	height: 100px;
 	border: 1px solid black;
 	border-radius: 5px;
-	margin: 2px;
+	margin: 5px;
 }
 
 .flashcard-buttons{
@@ -81,4 +81,8 @@
 	display: flex;
   	align-items: center;
   	justify-content: center;
+}
+
+.flascard-item {
+	margin: 20px 20px 20px 20px;
 }
