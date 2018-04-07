@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show, :edit, :update, :create, :destroy] do
+  resources :users, only: [:show, :edit, :update, :create, :destroy] do
 
     collection do
       get :search

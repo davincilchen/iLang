@@ -1,9 +1,9 @@
 class LessonsController < ApplicationController
-  
+  helper_method :sort_column, :sort_direction
   #index action 用來找出是否有ongoing lesson
   def index
     #找出所有自己上過或者正要上的課
-    @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user)
+    @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user).order(sort_column + " " + sort_direction)
     #找出是否有正要上的課 status 預設是 false 代表已經完成的的課
     #status 為true 表示正要上的課 同一個時間只能有一堂課在進行
     @lessons.each do |lesson|
@@ -142,4 +142,14 @@ class LessonsController < ApplicationController
   def vocab_params
     params.permit(:lesson_id, :student_id, :language_id, :key, :value)
   end
+
+  def sort_column
+    Lesson.column_names.include?(params[:sort]) ? params[:sort] : "title"
+
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end
