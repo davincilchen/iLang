@@ -38,3 +38,31 @@ $(document).on 'turbolinks:load', ->
     DisableFlipButton()
     return
   return
+
+$(document).on 'change', '#language_select', ->
+  $.ajax
+    url: '/vocabs/search_vocabs'
+    method: 'GET'
+    dataType: 'json'
+    data: {
+      language_id: $("#language_select option:selected").val(),
+    }
+    error: (xhr, status, error) ->
+      console.error 'AJAX Error: ' + status + error
+      return
+    success: (response) ->
+      vocabs = response['vocabs']
+      $('#vocabs-exam').empty()
+      i = 0
+      while i < vocabs.length
+        $('#vocabs-exam').append '<div class="row flascard-item">' + '<div class="col-md-1"></div>' + '<div class="col-md-5 flashcard-key"><span>' + vocabs[i]["key"] + '</span></div><div class="col-md-5 flashcard-value"><span>' + vocabs[i]["value"] + '</span></div><div class="col-md-1"></div></div>'
+        i++
+
+      $('.flascard-item').each (e) ->
+        if e != 0
+          $(this).hide()
+        return      
+  return
+
+
+
