@@ -10,24 +10,11 @@ class UsersController < ApplicationController
   end
 
   def home
-  end
-
-	def index
-		@users = User.all
-
-    @recent_lessons = Lesson.where(teacher_id: current_user).or(Lesson.where(student_id: current_user)).order(created_at: :desc).limit(10)
-
-    @recent_lessons.each do |lesson|
-      if lesson.status == true
-        @lesson = lesson
-      end
-    end
-
     if current_user.teaching_languages.count == 0 && current_user.learning_languages.count == 0
       flash[:notice] = "Plase select the language that you want to teach or learn"
       redirect_to edit_user_path(current_user)
     end
-	end
+  end
 
   # search user's result
   def search
