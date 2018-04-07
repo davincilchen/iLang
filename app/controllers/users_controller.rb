@@ -44,14 +44,9 @@ class UsersController < ApplicationController
   def show
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
-    @lessons = Lesson.where(teacher_id: params[:id]).or(Lesson.where(student_id: params[:id])).order(sort_column + " " + sort_direction)
-  end
-
-  def search_lessons
-    @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
-    @learning_languages = @user.learning_languages.pluck(:name).to_sentence
     @lessons = Lesson.where(teacher_id: params[:id]).or(Lesson.where(student_id: params[:id])).search(params[:search]).order(sort_column + " " + sort_direction)
   end
+
 
   def edit
     unless @user == current_user
