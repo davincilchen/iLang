@@ -1,0 +1,16 @@
+<!-- Masthead -->
+<header class="masthead text-white">
+  <div class="overlay">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <h2 class="white">A vocab a day, keep stranger away!</h2>    
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <%= render partial:"shared/flashcards.html.erb", locals: {vocabs: @vocabs}%>
+</div>
