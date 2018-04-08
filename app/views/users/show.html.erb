@@ -13,19 +13,19 @@
         <h3><%= @user.username %></h3>
       </div>
       <div class="user-profile-item">
-        <h5>I want to teach: <%= @teaching_languages%> </h5>
-        <h5>I want to learn: <%= @learning_languages%></h5>
+        <h5>想要教: <%= @teaching_languages%> </h5>
+        <h5>想要學: <%= @learning_languages%></h5>
       </div>
       <div class="user-profile-item">
         <% if @user != current_user %>
           <% if current_user.friending?(@user)%>
-            <%= link_to "Start lesson with #{@user.username}", new_lesson_user_path(@user), class: "btn btn-primary" %>
-            <%= link_to 'Unfriend', friendship_path(@user), method: :delete ,class: "btn btn-link" %>
+            <%= link_to "與#{@user.username}開始上課", new_lesson_user_path(@user), class: "btn btn-primary" %>
+            <%= link_to '刪除好友', friendship_path(@user), method: :delete ,class: "btn btn-link" %>
           <% else %>
-            <%= link_to 'Friend', friendships_path(friending_id: @user), method: :post , class: "btn btn-default" %>
+            <%= link_to '加為好友', friendships_path(friending_id: @user), method: :post , class: "btn btn-default" %>
           <% end %>
         <% else %>
-          <%= link_to 'Edit profile', edit_user_path(current_user), class: "btn btn-default" %>
+          <%= link_to '編輯資訊', edit_user_path(current_user), class: "btn btn-default" %>
         <% end %>
       </div>
       <div class="user-profile-item">
@@ -36,7 +36,7 @@
   <br>
   <div class="col-md-12">
     <div class="row">
-      <h4>Friend List</h4>
+      <h4>朋友列表</h4>
 
       <% @user.friendings.each do |friend| %>
         <div class="thumbnail friend-list">
@@ -51,15 +51,14 @@
     </div>
   </div>
   
-  <%= form_tag user_path(@user), :method => 'get', :id => "search" do %>
+  <!--<%= form_tag user_path(@user), :method => 'get', :id => "search" do %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
     <p>
       <%= text_field_tag :search, params[:search] %>
       <%= submit_tag "Search", :name => nil %>
     </p>
-    
-  <% end %>
+  <% end %> -->
 
-  <%= render partial:"shared/lessonsList.html.erb", locals:{ lessons: @lessons} %>
+  <!--<%= render partial:"shared/lessonsList.html.erb", locals:{ lessons: @lessons} %>-->
 </div>

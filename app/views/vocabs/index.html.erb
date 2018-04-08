@@ -16,8 +16,8 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-offset-5">
-            Review vocabularies for 
-            <%= select "language", "id", current_user.learning_languages.all.collect {|language| [ language.name, language.id ] }, {prompt: "Language"}, { id: 'language_select' }  %>
+          複習字彙  
+          <%= select "language", "id", current_user.learning_languages.all.collect {|language| [ language.name, language.id ] }, {prompt: "選擇語言"}, { id: 'language_select' }  %>
         </div>
     </div>
 <%= render partial:"shared/flashcards.html.erb", locals: {vocabs: @vocabs}%>
