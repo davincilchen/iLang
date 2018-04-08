@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: :landing
-  helper_method :sort_column, :sort_direction
-	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show, :search_lessons]
+	before_action :set_user, only: [:update, :edit, :learning, :teaching, :show]
   
   def landing
     if user_signed_in?
@@ -44,7 +43,6 @@ class UsersController < ApplicationController
   def show
     @teaching_languages = @user.teaching_languages.pluck(:name).to_sentence
     @learning_languages = @user.learning_languages.pluck(:name).to_sentence
-    @lessons = Lesson.where(teacher_id: params[:id]).or(Lesson.where(student_id: params[:id])).search(params[:search]).order(sort_column + " " + sort_direction)
   end
 
 
@@ -116,17 +114,9 @@ class UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:username, :description, :avatar, :sort, :direction, :search)
+    params.require(:user).permit(:username, :description, :avatar)
   end
 
-  def sort_column
-    Lesson.column_names.include?(params[:sort]) ? params[:sort] : "title"
-
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
 
 
 end

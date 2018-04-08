@@ -3,7 +3,8 @@ class LessonsController < ApplicationController
   #index action 用來找出是否有ongoing lesson
   def index
     #找出所有自己上過或者正要上的課
-    @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user).order(sort_column + " " + sort_direction)
+    # @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user).search(params[:search]).order(sort_column + " " + sort_direction)
+    @lessons = Lesson.where(teacher_id: current_user.id).or(Lesson.where(student_id: current_user.id)).search(params[:search]).order(sort_column + " " + sort_direction)
     #找出是否有正要上的課 status 預設是 false 代表已經完成的的課
     #status 為true 表示正要上的課 同一個時間只能有一堂課在進行
     @lessons.each do |lesson|
@@ -11,6 +12,7 @@ class LessonsController < ApplicationController
         @lesson = lesson
       end
     end
+
   end
 
   def new
@@ -87,8 +89,8 @@ class LessonsController < ApplicationController
   end
 
   def update
-    # url = "http://127.0.0.1:9001/api/1/getText?apikey=2113a5136cdc865146faab71c441141110311940d9c50c96080276eb6f781752&padID=#{@lesson.padID}"
-    url = "http://ilang-etherpad-lite.herokuapp.com/api/1/getText?apikey=60ab94c4ffb59abc33b3b5dcb2e92af48ac0b2544fa3d8ff3d7d172f573ee7c2&padID=#{@lesson.padID}"
+    url = "http://127.0.0.1:9001/api/1/getText?apikey=2113a5136cdc865146faab71c441141110311940d9c50c96080276eb6f781752&padID=#{@lesson.padID}"
+    # url = "http://ilang-etherpad-lite.herokuapp.com/api/1/getText?apikey=60ab94c4ffb59abc33b3b5dcb2e92af48ac0b2544fa3d8ff3d7d172f573ee7c2&padID=#{@lesson.padID}"
     response = RestClient.get(url)
     data = JSON.parse(response.body)
     @lesson.status = "false"

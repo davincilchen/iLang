@@ -21,7 +21,8 @@ class Lesson < ApplicationRecord
 
   def self.search(search)
     if search
-      where('title LIKE ?', "%#{search}%")
+      # where('title LIKE ?', "%#{search}%")
+      where('title LIKE ? OR content LIKE ? ', "%#{search}%", "%#{search}%")
     else
       all
     end
