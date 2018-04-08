@@ -18,3 +18,6 @@
 //= require etherpad
 //= require bootstrap-sprockets
 //= require_tree .
+jQuery( function($) {
+    $('a').tooltip();
+});

@@ -8,7 +8,6 @@
         <th><%= "語言" %></th>
         <th><%= "狀態" %></th>
         <th><%= "操作" %></th>
-        <th><%= "複習" %></th>
     </tr>
     <% lessons.each do |lesson| %>
         <tr>
@@ -27,10 +26,10 @@
             <% else %>
                 <td><%= "已完成"%></td>
             <% end %>
-            <td><%= link_to lesson_path(lesson) do %><i class="glyphicon glyphicon-play"><% end %></td>
             <td>
+                <%= link_to '<i class="glyphicon glyphicon-play"></i>'.html_safe, lesson_path(lesson), :title => '進入課程', :rel => 'tooltip', "data-placement" => "bottom" %>
                 <% if lesson.student == current_user%>
-                    <%= link_to vocab_path(lesson) do %><i class="glyphicon glyphicon-education"><% end %>
+                    <%= link_to '<i class="glyphicon glyphicon-education"></i>'.html_safe, vocab_path(lesson), :title => '複習字彙', :rel => 'tooltip', "data-placement" => "bottom" %>
                 <% end %>
             </td>
         </tr>
