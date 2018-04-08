@@ -11,12 +11,17 @@ DisableFlipButton = ->
   $('#flip-flashcard').css 'color', 'grey'
   return
 
+HideValue = ->
+  $('.flascard-item:visible .flashcard-value span').css 'display', 'none'
+  return
+
 $(document).on 'turbolinks:load', ->
   $('.flascard-item').each (e) ->
     if e != 0
       $(this).hide()
     return
   $('#next-flashcard').click ->
+    HideValue()
     EnableFlipButton()
     if $('.flascard-item:visible').next().length != 0
       $('.flascard-item:visible').next().show().prev().hide()
