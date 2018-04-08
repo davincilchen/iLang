@@ -3,7 +3,8 @@ class LessonsController < ApplicationController
   #index action 用來找出是否有ongoing lesson
   def index
     #找出所有自己上過或者正要上的課
-    @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user).order(sort_column + " " + sort_direction)
+    # @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user).search(params[:search]).order(sort_column + " " + sort_direction)
+    @lessons = Lesson.where(teacher_id: current_user.id).or(Lesson.where(student_id: current_user.id)).search(params[:search]).order(sort_column + " " + sort_direction)
     #找出是否有正要上的課 status 預設是 false 代表已經完成的的課
     #status 為true 表示正要上的課 同一個時間只能有一堂課在進行
     @lessons.each do |lesson|
