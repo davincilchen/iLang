@@ -28,8 +28,8 @@
         </div>
         <div><h3><%= link_to user.username, user_path(user) %></h3></div>
         <div>
-          <h5>Teaching: <%= user.teaching_languages.pluck(:name).to_sentence%> </h5>
-          <h5>Learning: <%= user.learning_languages.pluck(:name).to_sentence%></h5>
+          <h5>想要教: <%= user.teaching_languages.pluck(:name).to_sentence%> </h5>
+          <h5>想要學: <%= user.learning_languages.pluck(:name).to_sentence%></h5>
         </div>
       </div>
     <% end %>

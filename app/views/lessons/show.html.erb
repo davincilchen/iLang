@@ -1,23 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <% if @lesson.status == true %>
-        <h2>Teacher: <%= @lesson.teacher.username %></h2>
-        <h2>Student: <%= @lesson.student.username %></h2>
-        <h2>Lesson Title: <%= @lesson.title %> with <%= @lesson.teacher.username %> and <%= @lesson.student.username %></h2>
-      <% else %>
-        <% if current_user == @lesson.teacher %>
-          <h2>Lesson Title: <%= @lesson.language.name %> class with <%= @lesson.student.username %> on <%= @lesson.created_at %> about <%= @lesson.title%></h2>
-        <% else %>
-          <h2>Lesson Title: <%= @lesson.language.name %> class with <%= @lesson.teacher.username %> on <%= @lesson.created_at %> about <%= @lesson.title%></h2>
-        <% end %>
-      <% end %>
-      
+        <h5>課程主旨: <%= @lesson.title %></h5>
+        <h5>課程時間: <%= @lesson.created_at%></h5>
+        <h5>教師: <%= @lesson.teacher.username %></h5>
+        <h5>學生: <%= @lesson.student.username %></h5>
+        <h5>語言: <%= @lesson.language.name%></h5>
       <div id="PadBasic"></div>
-      <% if current_user == @lesson.teacher %>
-        <%= link_to 'Complete Lesson', lesson_path(@lesson), method: :patch, class: "btn btn-primary" %>
+      <% if current_user == @lesson.teacher and @lesson.status = true %>
+        <%= link_to '完成課程', lesson_path(@lesson), method: :patch, class: "btn btn-primary" %>
       <% else %>
-        <%= link_to 'Back to index', users_path, class: "btn btn-primary" %>
+        <%= link_to '回上頁', users_path, class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

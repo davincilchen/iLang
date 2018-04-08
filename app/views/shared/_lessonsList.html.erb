@@ -28,7 +28,11 @@
                 <td><%= "已完成"%></td>
             <% end %>
             <td><%= link_to lesson_path(lesson) do %><i class="glyphicon glyphicon-play"><% end %></td>
-            <td><%= link_to vocab_path(lesson) do %><i class="glyphicon glyphicon-education"><% end %></td>
+            <td>
+                <% if lesson.student == current_user%>
+                    <%= link_to vocab_path(lesson) do %><i class="glyphicon glyphicon-education"><% end %>
+                <% end %>
+            </td>
         </tr>
     <% end %>
 </table>

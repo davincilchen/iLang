@@ -1,13 +1,27 @@
 namespace :dev do
 	task fake_languages: :environment do 
 		Language.destroy_all
-		20.times do |l|
-			name = FFaker::Locale::language
-			Language.create!(
-				name: name
-			)
-			puts "Language #{name} is created"
-		end
+		Language.create!(
+			name: "中文"
+		)
+		Language.create!(
+      name: "英文"
+    )
+    Language.create!(
+      name: "日文"
+    )
+    Language.create!(
+      name: "德文"
+    )
+    Language.create!(
+      name: "法文"
+    )
+    Language.create!(
+      name: "西班牙文"
+    )
+    Language.create!(
+      name: "韓文"
+    )
 		puts "Totally #{Language.count} languages have been created"
 	end
 
@@ -33,7 +47,7 @@ namespace :dev do
  	task fake_teachings: :environment do
  		Teaching.destroy_all
     Language.all.each do |language|
-      3.times do |i|
+      10.times do |i|
         language.teachings.create(
           user: User.all.sample
           )
@@ -47,7 +61,7 @@ namespace :dev do
   task fake_learnings: :environment do
  		Learning.destroy_all
     Language.all.each do |language|
-      3.times do |i|
+      10.times do |i|
         language.learnings.create(
           user: User.all.sample
           )

@@ -19,19 +19,20 @@
       <div class="col-sm-6 col-sm-offset-3">
       <%= form_for @lesson do |f| %>
         <div class="form-group">
-          As
-          <%= select_tag "role", options_for_select([['teacher','teacher'],['student','student']]),include_blank: 'Role' %>
-          start lesson with 
-          <%= select "friendship", "id", current_user.friendships.all.collect {|friendship| [ friendship.friending.username, friendship.friending.id ] }, {prompt: "friend's name"}, { id: 'friends_select' }  %>
-          for 
-          <%= select "language", "id", Language.all.collect {|language| [ language.name, language.id ] }, {prompt: "Languages"}, { id: 'languages_select' }  %>
+          開始用
+          <%= select_tag "role", options_for_select([['教師','teacher'],['學生','student']]),include_blank: '選擇身份' %>
+          的身份與 
+          <%= select "friendship", "id", current_user.friendships.all.collect {|friendship| [ friendship.friending.username, friendship.friending.id ] }, {prompt: "選擇好友"}, { id: 'friends_select' }  %>
+          上 
+          <%= select "language", "id", Language.all.collect {|language| [ language.name, language.id ] }, {prompt: "選擇語言"}, { id: 'languages_select' }  %>
+          課
         </div>
         <div class="form-group">
-          <%= f.label :title, "Lesson Title:" %>
+          <%= f.label :title, "課程主旨" %>
           <%= f.text_field :title %>
         </div>
         <div>
-          <%= f.submit 'start', class: "btn btn-primary" %>
+          <%= f.submit '開始上課', class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
