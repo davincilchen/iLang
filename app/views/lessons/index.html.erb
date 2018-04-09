@@ -5,30 +5,25 @@
       <br>
 
       <% if params[:search] == "" || params[:search] == nil %>
-        <br>
-        <br>
-        <%= form_tag lessons_path, :method => 'get', :id => "search" do %>
-          <%= hidden_field_tag :direction, params[:direction] %>
-          <%= hidden_field_tag :sort, params[:sort] %>
+
+        <%= form_tag lessons_path, :method => 'get', :id => "lessons_search" do %>
           <p>
             <%= text_field_tag :search, params[:search], placeholder: 'Search for lesson title or content', size: 50 %>
             <%= submit_tag "Search", :name => nil %>
           </p>
-
+          <div id="lessons"><%= render 'shared/searched_lessons.html.erb' %></div>
         <% end %> 
 
         <%= render partial:"shared/lessonsList.html.erb", locals:{ lessons: @lessons} %>
 
       <% else %>
-        <%= form_tag lessons_path, :method => 'get', :id => "search" do %>
-          <%= hidden_field_tag :direction, params[:direction] %>
-          <%= hidden_field_tag :sort, params[:sort] %>
+        <%= form_tag lessons_path, :method => 'get', :id => "lessons_search" do %>
           <p>
             <%= text_field_tag :search, params[:search], placeholder: 'Search for lesson title or content', size: 50 %>
             <%= submit_tag "Search", :name => nil %>
           </p>
-
-        <% end %> 
+          <div id="lessons"><%= render 'shared/searched_lessons.html.erb' %></div>
+        <% end %>  
 
         <h3>我的課程列表</h3>
         <table class="table table-striped">

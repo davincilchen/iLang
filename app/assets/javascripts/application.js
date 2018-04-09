@@ -22,3 +22,14 @@
 jQuery( function($) {
     $('a').tooltip();
 });
+
+$(function() {
+  $("#lessons th a").live("click", function() {
+    $.getScript(this.href);
+    return false;
+  });
+  $("#lessons_search input").keyup(function() {
+    $.get($("#lessons_search").attr("action"), $("#lessons_search").serialize(), null, "script");
+    return false;
+  });
+});
