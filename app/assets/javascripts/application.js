@@ -20,7 +20,9 @@
 //= require_tree .
 
 jQuery( function($) {
-    $('a').tooltip();
+    $('a').tooltip({
+    	show: null
+    });
 });
 
 $(function() {

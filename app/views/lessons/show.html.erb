@@ -10,8 +10,14 @@
       <% if current_user == @lesson.teacher and @lesson.status = true %>
         <%= link_to '完成課程', lesson_path(@lesson), method: :patch, class: "btn btn-primary" %>
       <% else %>
-        <%= link_to '回上頁', lessons_path, class: "btn btn-primary" %>
+        <%= link_to '回上頁', url_for(request.env["HTTP_REFERER"] || root_path), class: "btn btn-primary" %>
       <% end %>
+      <br>
+      <div class="lesson_notification">
+        <h5 style="color:blue">電子白板注意事項</h5>
+        <h5>請用下面格式輸入生字(:隔開單字及翻譯)</h5>
+        <h5>beautiful:漂亮的</h5>       
+      </div>
     </div>
   </div>
 </div>
@@ -30,10 +36,6 @@ $('#PadBasic').pad({'padId': '<%= @lesson.padID %>'}); // sets the pad id and pu
       <div class="modal-body">
         <h3>請用下面格式輸入生字(:隔開單字及翻譯)</h3>
         <h4>beautiful:漂亮的</h4>
-        <br>
-        <h3>請用下面格式輸入問題與解答(Q:表示問題,A:表示解答)</h3>
-        <h4>Q:beautiful?</h4>
-        <h4>A:漂亮的.</h4>
       </div>
       <div class="modal-footer">
         <!-- Make sure to include the 'dismiss' class on the buttons -->
