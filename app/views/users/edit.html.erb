@@ -31,19 +31,20 @@
 
   <hr>
       <div class="col-md-6">
-      <%= label_tag 'I want to learn' %>:
+      <%= label_tag '我想要學' %>:
       <%= select_tag 'learn_languages', options_for_select(all_languages, @current_learnings), multiple: true, 'class'=>'form form-control', 'style'=>"height:350px"%>
       </div>
       
       <div class="col-md-6">
-      <%= label_tag 'I want to teach' %>:
+      <%= label_tag '我想要教' %>:
         <%= select_tag "teach_languages", options_for_select(all_languages, @current_teachings), multiple: true, 'class'=>'form form-control', 'style'=>"height:350px"%>
       </div>
     
     
     <div class="col-md-12">
       <div class="updatebutton">
-        <%= submit_tag 'Update', class: "btn btn-default"%>
+        <%= submit_tag 'Update', class: "btn btn-primary"%>
+        <%= link_to '回上頁', url_for(request.env["HTTP_REFERER"] || root_path), class: "btn btn-warning" %>
       </div>
     </div>
   <% end %>
