@@ -9,14 +9,7 @@ class Lesson < ApplicationRecord
   has_many :vocabs, dependent: :destroy
  
   def generate_random_pad
-    self.padID = random_string
-  end
-
-  def random_string(length=10)
-    chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-    randomstring = ''
-    length.times { randomstring << chars[rand(chars.size)] }
-    randomstring
+    self.pad_id = SecureRandom.hex(10)
   end
 
   def self.search(search)

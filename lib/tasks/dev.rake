@@ -90,16 +90,14 @@ namespace :dev do
   task fake_lessons: :environment do
     Lesson.destroy_all
     20.times do |i|
-      chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-      randomstring = ''
-      10.times { randomstring << chars[rand(chars.size)] }
+      randomstring = SecureRandom.hex(10)      
       Lesson.create!(
         title: "fake lesson",
         status: false,
         teacher_id: User.all.sample.id,
         student_id: User.all.sample.id,
         language: Language.all.sample,
-        padID: randomstring
+        pad_id: randomstring
       )
     end
     puts "Totally #{Lesson.count} lessons are created"
