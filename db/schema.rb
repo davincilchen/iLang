@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328144634) do
+ActiveRecord::Schema.define(version: 20180410144513) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20180328144634) do
     t.integer "teacher_id"
     t.integer "student_id"
     t.integer "language_id"
-    t.string "padID"
+    t.string "pad_id"
     t.index ["language_id"], name: "index_lessons_on_language_id"
     t.index ["student_id"], name: "index_lessons_on_student_id"
     t.index ["teacher_id"], name: "index_lessons_on_teacher_id"
