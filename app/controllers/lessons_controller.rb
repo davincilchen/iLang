@@ -7,11 +7,7 @@ class LessonsController < ApplicationController
     @lessons = Lesson.where(teacher_id: current_user.id).or(Lesson.where(student_id: current_user.id)).search(params[:search]).order(sort_column + " " + sort_direction)
     #找出是否有正要上的課 status 預設是 false 代表已經完成的的課
     #status 為true 表示正要上的課 同一個時間只能有一堂課在進行
-    @lessons.each do |lesson|
-      if lesson.status == true
-        @lesson = lesson
-      end
-    end
+    @lesson = @lessons.find{ |x| x.status == true }
   end
 
   def new
@@ -22,11 +18,11 @@ class LessonsController < ApplicationController
   def create
     #先檢查是否有正在進行的課程 若有 無法新增一堂課程 必須先完成進行中課程
     if current_user.is_ongoing_lesson?
-      flash[:alert] = "There is an ongoing lesson, please finished it first!!"
+      flash[:alert] = "您有一個正在進行中的課程，請先完成它"
       redirect_to lessons_path
     else
       #檢查role friend language是否都有被選擇 若有 根據role的角色新增teach或learn課程
-      unless params[:role].blank? || params[:friendship][:id].blank? || params[:language][:id].blank? 
+      if params[:role].present? && params[:friendship][:id].present? && params[:language][:id].present? 
         if params[:role] == "teacher"
           @lesson = current_user.teached_lessons.build(lesson_params)
           @lesson.student_id = params[:friendship][:id]
@@ -47,13 +43,9 @@ class LessonsController < ApplicationController
         end
       else
         #role friend language任一沒有被選擇 提示必須選取所有選項
-        flash[:alert] = "Please select all item"
-          if params[:id] == ""
-            redirect_to new_lesson_path
-          else
-            # 回上頁(如果是從user show 來, 就會回到那一頁)
-            redirect_back fallback_location: root_path
-          end
+        flash[:alert] = "請選擇所有選項"
+        # 回上頁(如果是從user show 來, 就會回到那一頁)
+        redirect_back fallback_location: root_path
       end
     end
   end
@@ -61,14 +53,14 @@ class LessonsController < ApplicationController
   #ajax action 用來動態根據role及friend找出他想學或者想教的語言選項
   def update_languages
     #沒有選擇role 直接選擇friend時 提示選擇角色
-    if params[:role] == ""
-      @role = "false"
+    if params[:role].blank?
+      @enable_alert = true
       respond_to do |format|
-        format.js { flash.now[:alert] = "Please select your role" }
+        format.js { flash.now[:alert] = "請選擇你的身份" }
       end
     #選擇role還未選擇friend 因是正常步驟 不做任何事
-    elsif params[:friendship_id] == ""
-      @role = "true"
+    elsif params[:friendship_id].blank?
+      @enable_alert = false
     else
       @user = User.find(params[:friendship_id])
       if params[:role] == "teacher"

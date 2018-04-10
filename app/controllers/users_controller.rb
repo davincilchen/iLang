@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def search
     if params["option"] == "Teach"
       # select all language
-      if params[:language][:id] == ""
+      if params[:language][:id].blank?
         @users = User.joins(:teaching_languages).group('users.id').having('count(user_id) > 0').order("random()")
       # select certain language
       else
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
     elsif params["option"] == "Learn"
       
-      if params[:language][:id] == ""
+      if params[:language][:id].blank?
         @users = User.joins(:learning_languages).group('users.id').having('count(user_id) > 0').order("random()")
       else
         @users = User.joins(:learning_languages).where("name = ?", params[:language][:id]).all.order("random()")

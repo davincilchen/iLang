@@ -1,8 +1,6 @@
-<% if @languages != nil %>
+<% if @languages %>
   $("#languages_select").empty().append("<%= escape_javascript(render(:partial => @languages)) %>")
   $("#alert").html('');
-<% else %>
-  <% if @role == "false" %>
-    $("#alert").html('<%= j render partial: "shared/alert" %>');
-  <% end %>
+<% elsif @enable_alert  %>
+  $("#alert").html('<%= j render partial: "shared/alert" %>');
 <% end %>
