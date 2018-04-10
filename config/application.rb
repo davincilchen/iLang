@@ -10,7 +10,7 @@ module ILang
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
-    config.filestack_rails.api_key = "A6SyNX4ymRHOey4eMSXThz"
+    config.filestack_rails.api_key = "AxTNomGWT5KBXe6VNgUu7z"
     config.filestack_rails.client_name = "iLang"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

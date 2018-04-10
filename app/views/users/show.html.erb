@@ -6,7 +6,7 @@
         <%  if @user.avatar? %>
           <%= image_tag @user.avatar, width: '150px'  %>
         <% else %>
-          <%= image_tag "https://cdn.filestackcontent.com/I9zuHhNSKWdy9PlGGUHS", width: '150px'  %>
+          <%= image_tag "https://cdn.filestackcontent.com/EGckE21mQjmc18I37imm", width: '150px'  %>
         <% end %>
       </div>
       <div class="user-profile-item"> 
@@ -43,7 +43,7 @@
           <% if friend.avatar? %>
             <%= link_to image_tag(friend.avatar, class: "user-avatar"), user_path(friend) %>
           <% else %>
-            <%= link_to image_tag("https://cdn.filestackcontent.com/I9zuHhNSKWdy9PlGGUHS", class: "user-avatar"), user_path(friend) %> 
+            <%= link_to image_tag("https://cdn.filestackcontent.com/EGckE21mQjmc18I37imm", class: "user-avatar"), user_path(friend) %> 
           <% end %>
           <%= link_to friend.username, user_path(friend) %>
         </div>

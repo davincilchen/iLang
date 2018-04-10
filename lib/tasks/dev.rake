@@ -30,7 +30,7 @@ namespace :dev do
     20.times do |i|
       user_name = FFaker::Name.first_name
       file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
-      client = FilestackClient.new('A6SyNX4ymRHOey4eMSXThz')
+      client = FilestackClient.new('AxTNomGWT5KBXe6VNgUu7z')
       filelink = client.upload(filepath: file, multipart: false)
       User.create!(
         username: user_name,
@@ -130,7 +130,7 @@ namespace :dev do
 
   task update_logo: :environment do
     file = File.open("#{Rails.root}/public/logo.png")
-    client = FilestackClient.new('A6SyNX4ymRHOey4eMSXThz')
+    client = FilestackClient.new('AxTNomGWT5KBXe6VNgUu7z')
     client.upload(filepath: file, multipart: false)
 
     puts "update logo pic"
@@ -138,7 +138,7 @@ namespace :dev do
 
   task update_profile: :environment do
     file = File.open("#{Rails.root}/public/profile.png")
-    client = FilestackClient.new('A6SyNX4ymRHOey4eMSXThz')
+    client = FilestackClient.new('AxTNomGWT5KBXe6VNgUu7z')
     client.upload(filepath: file, multipart: false)
 
     puts "update profile pic"
