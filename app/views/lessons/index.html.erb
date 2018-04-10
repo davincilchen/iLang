@@ -37,7 +37,7 @@
                     <td><%= lesson.title %></td>
                     <td>
                       <% @content = lesson.content %>
-                      ... <%= /\S*\s\S*\s?#{params[:search]}\s?\S\s?\S*/.match(@content)%> ...
+                      ... <%= /\S*\s?\S*\s?#{params[:search]}\s?\S\s?\S*/.match(@content)%> ...
                     </td>
                     <td>
                         <%= link_to '<i class="glyphicon glyphicon-play"></i>'.html_safe, lesson_path(lesson), :title => '進入課程', :rel => 'tooltip', "data-placement" => "bottom" %>
