@@ -66,6 +66,10 @@ change the setting to the local mode
 上過的課堂累積一定量後，我想要用字卡方式綜合複習單字
 以便增強我的記憶力
 ```
+## Todos
+ID|Description|Code Location|Status
+---|---|---|---
+1|add guided tour on homepage after user login |user#home | OPEN
 ## Authors
 
 See also the list of [contributors](https://github.com/qscez2001/iLang/contributors) who participated in this project.
