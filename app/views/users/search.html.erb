@@ -10,7 +10,7 @@
         </select>
         <!-- https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms -->
         <%= collection_select(:language, :id, Language.all, :name, :name, options ={:include_blank => "全部語言"}) %>
-        <h3>的朋友</h3>
+          <h3>的老師/學生</h3>
         <input type="submit" class="btn btn-primary" name="commit" value="確認" data-disable-with="Search">
       </form>
     </div>
