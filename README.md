@@ -70,6 +70,11 @@ change the setting to the local mode
 ID|Description|Code Location|Status
 ---|---|---|---
 1|add guided tour on homepage after user login |user#home | OPEN
-## Authors
+2|add comment to the code where more explanations are needed | entire project | OPEN
+3|add unit test|entire project|OPEN
+4|review all models and add data base validation|all models|OPEN
+5|adjust fake data either by modifying dev rake or manually | dev rake or manually |OPEN
+6|block user from viewing lesson content that does not belong to himself, either as student or teacher | lesson#show|OPEN
 
+## Authors
 See also the list of [contributors](https://github.com/qscez2001/iLang/contributors) who participated in this project.
