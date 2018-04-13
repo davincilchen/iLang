@@ -62,11 +62,11 @@ class LessonsController < ApplicationController
     elsif params[:friendship_id].blank?
       @enable_alert = false
     else
-      @user = User.find(params[:friendship_id])
       if params[:role] == "teacher"
+        @user = User.find(params[:friendship_id])
         @languages = @user.learning_languages
       else
-        @languages = @user.teaching_languages
+        @languages = current_user.learning_languages
       end      
       respond_to do |format|
         format.js
@@ -90,7 +90,8 @@ class LessonsController < ApplicationController
       text = data["data"]["text"]
       text.to_s.split("\n").each do |vocal|
         @tmp_vocabs = Vocab.where("key = ?", vocal.to_s.split(":")[0])
-        if @tmp_vocabs.first.nil?
+        isVocab = vocal.to_s.split(":")[1]
+        if @tmp_vocabs.first.nil? && isVocab.present?
           @vocab = @lesson.vocabs.build(vocab_params)
           @vocab.lesson_id = @lesson.id
           @vocab.language_id = @lesson.language_id
