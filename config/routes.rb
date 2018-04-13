@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :lessons, only: [:index, :new, :create, :show, :update] do
     collection do
       get :update_languages
+      get :review
     end
   end
 

@@ -118,6 +118,10 @@ class LessonsController < ApplicationController
     end
   end
 
+  def review
+    @lessons = Lesson.where("student_id = ? and status = ?", current_user.id,false).search(params[:search]).order(sort_column + " " + sort_direction)
+  end
+
   private
   def get_lesson
     @lesson = Lesson.find(params[:id])
