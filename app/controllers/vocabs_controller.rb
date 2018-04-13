@@ -8,7 +8,7 @@ class VocabsController < ApplicationController
     @vocabs = @lesson.vocabs
   end
   def search_vocabs
-    @vocabs = Vocab.where("language_id = ?", params[:language_id])    
+    @vocabs = Vocab.where("language_id = ? and student_id = ?", params[:language_id],current_user)    
     if request.xhr?
       respond_to do |format|
         format.json {
