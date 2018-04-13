@@ -93,7 +93,7 @@ class LessonsController < ApplicationController
     if @lesson.update(lesson_content_param)
       text = data["data"]["text"]
       text.to_s.split("\n").each do |vocal|
-        @tmp_vocabs = Vocab.where("key = ?", vocal.to_s.split(":")[0])
+        @tmp_vocabs = Vocab.where("key = ? and student_id = ? and lesson_id = ?", vocal.to_s.split(":")[0],@lesson.student_id,@lesson.id)
         isVocab = vocal.to_s.split(":")[1]
         if @tmp_vocabs.first.nil? && isVocab.present?
           @vocab = @lesson.vocabs.build(vocab_params)
