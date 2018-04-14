@@ -98,8 +98,17 @@ class UsersController < ApplicationController
 
   # start lesson with certain user
   def new_lesson
-    @lesson = Lesson.new
-    @user = User.find(params[:id])
+    partner_user = User.find(params[:id])
+    if current_user.is_ongoing_lesson?
+      flash[:alert] = "您有一個正在進行中的課程，請先完成它"
+      redirect_to ongoing_lessons_path
+    elsif partner_user.is_ongoing_lesson?
+      flash[:alert] = "您的朋友有一個正在進行中的課程，請等他完成它"
+      redirect_to new_lesson_path   
+    else
+      @lesson = Lesson.new
+      @user = User.find(params[:id])
+    end
   end
 
   
