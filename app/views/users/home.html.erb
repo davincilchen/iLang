@@ -17,11 +17,7 @@
 	</div>
 	<div class="row">
 		<%= link_to "找老師/找學生", search_users_path, class: "col-md-2 btn button-links" %>	
-    <% if current_user.is_ongoing_lesson? %>
-      <%= link_to'開始上課', ongoing_lessons_path, class: "col-md-2 btn button-links" %>
-    <% else %>
-      <%= link_to'開始上課', new_lesson_path, class: "col-md-2 btn button-links" %>
-    <% end %>
+    <%= link_to'開始上課', new_lesson_path, class: "col-md-2 btn button-links" %>
 		<%= link_to "複習", reviews_path, class: "col-md-2 btn button-links"%>
     <%= link_to "課程列表", lessons_path, class: "col-md-2 btn button-links"%>
 	</div>

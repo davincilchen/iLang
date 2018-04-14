@@ -11,7 +11,12 @@ class LessonsController < ApplicationController
   end
 
   def new
-    @lesson = Lesson.new
+    logger.debug current_user.is_ongoing_lesson?
+    if current_user.is_ongoing_lesson?
+      redirect_to ongoing_lessons_path
+    else
+      @lesson = Lesson.new
+    end
   end
 
   def ongoing
