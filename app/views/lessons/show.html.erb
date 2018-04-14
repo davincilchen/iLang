@@ -10,7 +10,7 @@
       <% if current_user == @lesson.teacher and @lesson.status = true %>
         <%= link_to '完成課程', lesson_path(@lesson), method: :patch, class: "btn btn-primary" %>
       <% else %>
-        <%= link_to '回上頁', url_for(request.env["HTTP_REFERER"] || root_path), class: "btn btn-primary" %>
+        <%= link_to '回上頁', lessons_path, class: "btn btn-primary" %>
       <% end %>
       <br>
       <div class="lesson_notification">
