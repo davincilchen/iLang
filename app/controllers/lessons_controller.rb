@@ -20,12 +20,16 @@ class LessonsController < ApplicationController
   end
 
   def ongoing
-    #找出所有自己上過或者正要上的課
-    # @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user).search(params[:search]).order(sort_column + " " + sort_direction)
-    @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user)
-    #找出是否有正要上的課 status 預設是 false 代表已經完成的的課
-    #status 為true 表示正要上的課 同一個時間只能有一堂課在進行
-    @lesson = @lessons.find{ |x| x.status == true }
+    if current_user.is_ongoing_lesson?
+      #找出所有自己上過或者正要上的課
+      # @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user).search(params[:search]).order(sort_column + " " + sort_direction)
+      @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user)
+      #找出是否有正要上的課 status 預設是 false 代表已經完成的的課
+      #status 為true 表示正要上的課 同一個時間只能有一堂課在進行
+      @lesson = @lessons.find{ |x| x.status == true }     
+    else
+      redirect_to lessons_path
+    end
   end
 
   #create action會有role, friend_id, language_id, title四個params傳入
