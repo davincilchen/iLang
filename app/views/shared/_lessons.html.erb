@@ -14,7 +14,7 @@
           <div id="lessons"><%= render 'shared/searched_lessons.html.erb' %></div>
         <% end %> 
 
-        <%= render partial:"shared/lessonsList.html.erb", locals:{ lessons: @lessons} %>
+        <%= render partial:"shared/lessonsList.html.erb", locals:{ lessons: @lessons, lesson: nil} %>
 
       <% else %>
         <%= form_tag lessons_path, :method => 'get', :id => "lessons_search" do %>

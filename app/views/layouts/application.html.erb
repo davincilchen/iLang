@@ -8,7 +8,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= filestack_js_include_tag %>
     <%= filestack_js_init_tag %> 
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   </head>
 
   <body>
@@ -36,7 +35,7 @@
               <!-- 根據使用者目前是否有進行中的課程顯示加入課程或開啟課程 -->
               <li><%= link_to('找老師/找學生', search_users_path) %></li>
               <% if current_user.is_ongoing_lesson? %>
-                <li><%= link_to('開始上課', lessons_path) %></li>
+                <li><%= link_to('開始上課', ongoing_lessons_path) %></li>
               <% else %>
                 <li><%= link_to('開始上課', new_lesson_path) %></li>
               <% end %>

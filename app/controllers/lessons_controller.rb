@@ -14,16 +14,25 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new
   end
 
+  def ongoing
+    #找出所有自己上過或者正要上的課
+    # @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user).search(params[:search]).order(sort_column + " " + sort_direction)
+    @lessons = Lesson.where("teacher_id = ? or student_id = ?",current_user,current_user)
+    #找出是否有正要上的課 status 預設是 false 代表已經完成的的課
+    #status 為true 表示正要上的課 同一個時間只能有一堂課在進行
+    @lesson = @lessons.find{ |x| x.status == true }
+  end
+
   #create action會有role, friend_id, language_id, title四個params傳入
   def create
     #先檢查是否有正在進行的課程 若有 無法新增一堂課程 必須先完成進行中課程
     partner_user = User.find(params[:friendship][:id])
     if current_user.is_ongoing_lesson?
       flash[:alert] = "您有一個正在進行中的課程，請先完成它"
-      redirect_to lessons_path
+      redirect_to ongoing_lessons_path
     elsif partner_user.is_ongoing_lesson?
       flash[:alert] = "您的朋友有一個正在進行中的課程，請等他完成它"
-      redirect_to lessons_path   
+      redirect_to new_lesson_path   
     else
       #檢查role friend language是否都有被選擇 若有 根據role的角色新增teach或learn課程
       if params[:role].present? && params[:friendship][:id].present? && params[:language][:id].present? 

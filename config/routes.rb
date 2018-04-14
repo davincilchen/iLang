@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     collection do
       get :update_languages
       get :review
+      get :ongoing
     end
   end
 
