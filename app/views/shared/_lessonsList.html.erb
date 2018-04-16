@@ -1,13 +1,10 @@
-<h3>我的課程列表</h3>
-<table class="table table-striped">
+<table class="table table-striped lesson-table">
     <tr>
         <th><%= sortable "title" %></th>
-        <th><%= sortable("created_at") %></th>
         <th><%= "教師" %></th>
         <th><%= "學生" %></th>
         <th><%= "語言" %></th>
-        <th><%= "狀態" %></th>
-        <th><%= "操作" %></th>
+        <th><%= "字卡" %></th>
     </tr>
     <% if lesson %>
         <%= render partial:"shared/lessonPartial.html.erb", locals:{ lesson: lesson} %>

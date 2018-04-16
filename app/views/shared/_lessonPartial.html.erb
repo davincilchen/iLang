@@ -1,6 +1,5 @@
 <tr>
-    <td><%= lesson.title %></td>
-    <td><%= lesson.created_at.strftime("%B %e, %Y") %></td>
+    <td><%= link_to lesson.title, lesson_path(lesson), :title => '進入課程', :rel => 'tooltip', "data-placement" => "bottom" %></td>
     <% if lesson.teacher != current_user %>
         <td><%= link_to lesson.teacher.username, user_path(lesson.teacher) %></td>
         <td><%= lesson.student.username %></td>
@@ -9,13 +8,7 @@
         <td><%= link_to lesson.student.username, user_path(lesson.student) %></td>
     <% end %>
     <td><%= lesson.language.name %></td>
-    <% if lesson.status == true %>
-        <td><%= "進行中"%></td>
-    <% else %>
-        <td><%= "已完成"%></td>
-    <% end %>
     <td>
-        <%= link_to '<i class="glyphicon glyphicon-play"></i>'.html_safe, lesson_path(lesson), :title => '進入課程', :rel => 'tooltip', "data-placement" => "bottom" %>
         <% if lesson.student == current_user%>
             <%= link_to '<i class="glyphicon glyphicon-education"></i>'.html_safe, vocab_path(lesson), :title => '複習字彙', :rel => 'tooltip', "data-placement" => "bottom" %>
         <% end %>
