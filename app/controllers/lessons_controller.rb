@@ -34,17 +34,17 @@ class LessonsController < ApplicationController
 
   #create action會有role, friend_id, language_id, title四個params傳入
   def create
+    #檢查role friend language是否都有被選擇 若有 根據role的角色新增teach或learn課程
+    if params[:role].present? && params[:friendship][:id].present? && params[:language][:id].present? 
     #先檢查是否有正在進行的課程 若有 無法新增一堂課程 必須先完成進行中課程
-    partner_user = User.find(params[:friendship][:id])
-    if current_user.is_ongoing_lesson?
-      flash[:alert] = "您有一個正在進行中的課程，請先完成它"
-      redirect_to ongoing_lessons_path
-    elsif partner_user.is_ongoing_lesson?
-      flash[:alert] = "您的朋友有一個正在進行中的課程，請等他完成它"
-      redirect_to new_lesson_path   
-    else
-      #檢查role friend language是否都有被選擇 若有 根據role的角色新增teach或learn課程
-      if params[:role].present? && params[:friendship][:id].present? && params[:language][:id].present? 
+      partner_user = User.find(params[:friendship][:id])
+      if current_user.is_ongoing_lesson?
+        flash[:alert] = "您有一個正在進行中的課程，請先完成它"
+        redirect_to ongoing_lessons_path
+      elsif partner_user.is_ongoing_lesson?
+        flash[:alert] = "您的朋友有一個正在進行中的課程，請等他完成它"
+        redirect_to new_lesson_path   
+      else
         if params[:role] == "teacher"
           @lesson = current_user.teached_lessons.build(lesson_params)
           @lesson.student_id = params[:friendship][:id]
@@ -63,12 +63,12 @@ class LessonsController < ApplicationController
           flash[:alert] = @lesson.errors.full_messages.to_sentence
           render :action => :new
         end
-      else
-        #role friend language任一沒有被選擇 提示必須選取所有選項
-        flash[:alert] = "請選擇所有選項"
-        # 回上頁(如果是從user show 來, 就會回到那一頁)
-        redirect_back fallback_location: root_path
       end
+    else
+      #role friend language任一沒有被選擇 提示必須選取所有選項
+      flash[:alert] = "請選擇所有選項"
+      # 回上頁(如果是從user show 來, 就會回到那一頁)
+      redirect_back fallback_location: root_path
     end
   end
 
