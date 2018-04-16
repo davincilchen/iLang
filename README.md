@@ -48,6 +48,11 @@ change the setting to the local mode
 ## User Stories
 ```
 身為一個在線上學/教外語的使用者
+我跟老師約好要使用iLang來上課，
+先加入老師或學生好友, 再邀請對方開始上課
+```
+```
+身為一個在線上學/教外語的使用者
 我想要與對方互動並且紀錄每次的上課筆記/教材
 以便我課後整理、運用
 ```
@@ -74,7 +79,7 @@ ID|Description|Code Location|Status
 3|add unit test|entire project|OPEN
 4|review all models and add data base validation|all models|OPEN
 5|adjust fake data either by modifying dev rake or manually | dev rake or manually |OPEN
-6|block user from viewing lesson content that does not belong to himself, either as student or teacher | lesson#show|OPEN
+6|block user from viewing lesson content that does not belong to himself, either as student or teacher | lesson#show|DONE
 
 ## Authors
 See also the list of [contributors](https://github.com/qscez2001/iLang/contributors) who participated in this project.
