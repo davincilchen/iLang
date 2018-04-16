@@ -1,16 +1,4 @@
 <!-- Masthead -->
-<header class="masthead text-white">
-  <div class="overlay">
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-        <h2 class="white">A vocab a day, keep stranger away!</h2>    
-      </div>
-    </div>
-  </div>
-</header>
-
 <br>
 <br>
 
@@ -18,18 +6,11 @@
   <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
       <%= form_for @lesson do |f| %>
-        <div class="form-group">
-          開始用
-          <%= select_tag "role", options_for_select([['教師','teacher'],['學生','student']]),include_blank: '選擇身份' %>
-          的身份與 
-          <%= select "friendship", "id", current_user.friendships.all.collect {|friendship| [ friendship.friending.username, friendship.friending.id ] }, {prompt: "選擇好友"}, { id: 'friends_select' }  %>
-          上 
-          <%= select "language", "id", Language.all.collect {|language| [ language.name, language.id ] }, {prompt: "選擇語言"}, { id: 'languages_select' }  %>
-          課
-        </div>
-        <div class="form-group">
-          <%= f.label :title, "課程主旨" %>
-          <%= f.text_field :title %>
+        <div class="form-group form-text">
+          <div><b>我的身份：</b> <%= select_tag "role", options_for_select([['教師','teacher'],['學生','student']]),include_blank: '選擇身份' %></div><br>
+          <div><b>參與者：</b> <%= select "friendship", "id", current_user.friendships.all.collect {|friendship| [ friendship.friending.username, friendship.friending.id ] }, {prompt: "選擇好友"}, { id: 'friends_select' }  %></div><br>
+          <div><b>學習語言：</b> <%= select "language", "id", Language.all.collect {|language| [ language.name, language.id ] }, {prompt: "選擇語言"}, { id: 'languages_select' }  %> </div><br>
+          <div><%= f.label :title, "課程主旨" %>：<%= f.text_field :title %></div>
         </div>
         <div>
           <%= f.submit '開始上課', class: "btn btn-primary" %>
