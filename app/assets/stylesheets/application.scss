@@ -7,6 +7,10 @@
 @import "style.scss";
 @import "simple-line-icons";
 
+body{
+	font-size:24px;
+}
+
 .user-profile-item{
 	display: inline-block;
 	margin: 15px 15px 0px 0px;
@@ -35,7 +39,6 @@
 	width: 100%;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 24px;
 }
 
 .flashcard-key span{
@@ -44,7 +47,6 @@
 	width: 100%;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 24px;
 }
 
 .flashcard-value{
@@ -94,24 +96,6 @@
 	margin: 0px;
 	resize: vertical;
 }
-.form-text{
-	font-size:24px;
-}
-.btn{
-	font-size:24px;
-}
 #lessons_search{
 	line-height: 32px;
-}
-.lesson-table{
-	font-size:24px;
-}
-#previous-flashcard{
-	font-size:24px;
-}
-#flip-flashcard{
-	font-size:24px;
-}
-#next-flashcard{
-	font-size:24px;
 }
