@@ -35,7 +35,7 @@
 	width: 100%;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 20px;
+	font-size: 24px;
 }
 
 .flashcard-key span{
@@ -44,18 +44,18 @@
 	width: 100%;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 20px;
+	font-size: 24px;
 }
 
 .flashcard-value{
-	height: 100px;
+	height: 150px;
 	border: 1px solid black;
 	border-radius: 5px;
 	margin: 5px;
 }
 
 .flashcard-key{
-	height: 100px;
+	height: 150px;
 	border: 1px solid black;
 	border-radius: 5px;
 	margin: 5px;
@@ -95,14 +95,23 @@
 	resize: vertical;
 }
 .form-text{
-	font-size:18px;
+	font-size:24px;
 }
 .btn{
-	font-size:18px;
+	font-size:24px;
 }
 #lessons_search{
 	line-height: 32px;
 }
 .lesson-table{
-	font-size:18px;
+	font-size:24px;
+}
+#previous-flashcard{
+	font-size:24px;
+}
+#flip-flashcard{
+	font-size:24px;
+}
+#next-flashcard{
+	font-size:24px;
 }
